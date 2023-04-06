@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 
 function App() {
   return (
     <div>
-      <Heading>Crypto App</Heading>
+      <Routes>
+        <Route path="/" />
+      </Routes>
     </div>
   );
 }
@@ -12,7 +14,3 @@ function App() {
 export default App;
 
 // CSS
-
-const Heading = styled.h1`
-  color: var(--primary-500);
-`;

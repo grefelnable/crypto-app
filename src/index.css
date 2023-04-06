@@ -22,16 +22,16 @@ html {
   --primary-900: #332309;
 
   /* grey */
-  --grey-50: #fafaf9;
-  --grey-100: #f5f5f4;
-  --grey-200: #e7e5e4;
-  --grey-300: #d6d3d1;
-  --grey-400: #a8a29e;
-  --grey-500: #78716c;
-  --grey-600: #57534e;
-  --grey-700: #44403c;
-  --grey-800: #292524;
-  --grey-900: #1c1917;
+  --grey-50: #f9fafb;
+  --grey-100: #f3f4f6;
+  --grey-200: #e5e7eb;
+  --grey-300: #d1d5db;
+  --grey-400: #9ca3af;
+  --grey-500: #6b7280;
+  --grey-600: #4b5563;
+  --grey-700: #374151;
+  --grey-800: #1f2937;
+  --grey-900: #111827;
 
   --black: #222;
   --white: #fff;
@@ -47,8 +47,8 @@ html {
   --shadow-4: 0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1);
 
-  --backgroundColor: var(--grey-50);
-  --textColor: var(--grey-900);
+  --backgroundColor: var(--grey-900);
+  --textColor: #fff;
 
   /* rest of the variables */
   --letterSpacing: 1px;

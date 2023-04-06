@@ -1,14 +1,8 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "../components/Navbar";
-
 const Home = () => {
   return (
-    <>
-      <Navbar />
-      <section>
-        <Outlet />
-      </section>
-    </>
+    <section>
+      <h2>Home</h2>
+    </section>
   );
 };
 export default Home;

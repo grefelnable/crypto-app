@@ -2,10 +2,12 @@ import styled from "styled-components";
 import logo from "../assets/crypto-logo.png";
 import { ReactComponent as SearchIcon } from "../assets/search-icon.svg";
 import { ReactComponent as HamburgerIcon } from "../assets/hamburger-menu.svg";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [toggleMenu, setToggleMenu] = useState(false);
   const handleMenuClick = () => {
-    console.log("clicked");
+    return setToggleMenu(!toggleMenu);
   };
   return (
     <Nav>
@@ -25,7 +27,7 @@ const Navbar = () => {
           </HamburgerIconContainer>
         </SearchMenuContainer>
         {/* Dropdown menu */}
-        <DropdownContent>
+        <DropdownContent style={{ display: `${toggleMenu ? "" : "none"}` }}>
           <a href="#">Coins</a>
           <a href="#">Portfolio</a>
         </DropdownContent>
@@ -100,15 +102,35 @@ const HamburgerIconContainer = styled.i`
 `;
 
 const DropdownContent = styled.div`
-  background-color: var(--grey-700);
+  background-color: var(--grey-800);
+  border-radius: 0.5em;
+  box-shadow: var(--shadow-4);
   position: absolute;
-  padding: 1em 0.75em;
+  padding: 1em 2em;
+  padding-left: 1em;
   right: 1.5em;
   top: 3.5em;
   z-index: 10;
+  animation: growOut 250ms ease-in-out forwards;
 
+  /* animation keyframes */
+  @keyframes growOut {
+    0% {
+      transform: scale(0);
+    }
+    80% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
   a {
-    color: white;
+    color: var(--grey-300);
     display: block;
+    transition: var(--transition);
+  }
+  a:hover {
+    color: var(--primary-500);
   }
 `;

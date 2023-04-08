@@ -1,19 +1,27 @@
 import styled from "styled-components";
 import logo from "../assets/crypto-logo.png";
 import { ReactComponent as SearchIcon } from "../assets/search-icon.svg";
+import { ReactComponent as HamburgerIcon } from "../assets/hamburger-menu.svg";
 
 const Navbar = () => {
   return (
     <Nav>
-      <LogoContainer>
-        <img src={logo} alt="crypto logo by grefel" className="img" />
-      </LogoContainer>
-      <SearchContainer>
-        <input type="text" placeholder="Search" />
-        <i>
-          <SearchIcon />
-        </i>
-      </SearchContainer>
+      <SectionCenter>
+        <LogoContainer>
+          <img src={logo} alt="crypto logo by grefel" className="img" />
+        </LogoContainer>
+        <SearchMenuContainer>
+          <SearchContainer>
+            <input type="text" placeholder="Search" />
+            <i>
+              <SearchIcon />
+            </i>
+          </SearchContainer>
+          <i>
+            <HamburgerIcon />
+          </i>
+        </SearchMenuContainer>
+      </SectionCenter>
     </Nav>
   );
 };
@@ -23,14 +31,22 @@ export default Navbar;
 
 const Nav = styled.nav`
   border: 2px solid magenta;
-  width: 100%;
-  height: 55px;
   display: flex;
   align-items: center;
+  height: 55px;
 `;
 
 const LogoContainer = styled.div`
   width: 100px;
+`;
+
+const SectionCenter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90vw;
+  margin: 0 auto;
+  max-width: 1170px;
 `;
 
 const SearchContainer = styled.form`
@@ -56,5 +72,14 @@ const SearchContainer = styled.form`
     top: 50%;
     transform: translateY(-45%);
     left: 15px;
+  }
+`;
+
+const SearchMenuContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  i {
+    stroke: var(--grey-500);
   }
 `;

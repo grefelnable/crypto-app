@@ -4,6 +4,9 @@ import { ReactComponent as SearchIcon } from "../assets/search-icon.svg";
 import { ReactComponent as HamburgerIcon } from "../assets/hamburger-menu.svg";
 
 const Navbar = () => {
+  const handleMenuClick = () => {
+    console.log("clicked");
+  };
   return (
     <Nav>
       <SectionCenter>
@@ -17,10 +20,15 @@ const Navbar = () => {
               <SearchIcon />
             </i>
           </SearchContainer>
-          <i>
+          <HamburgerIconContainer onClick={handleMenuClick}>
             <HamburgerIcon />
-          </i>
+          </HamburgerIconContainer>
         </SearchMenuContainer>
+        {/* Dropdown menu */}
+        <DropdownContent>
+          <a href="#">Coins</a>
+          <a href="#">Portfolio</a>
+        </DropdownContent>
       </SectionCenter>
     </Nav>
   );
@@ -30,7 +38,6 @@ export default Navbar;
 // CSS
 
 const Nav = styled.nav`
-  border: 2px solid magenta;
   display: flex;
   align-items: center;
   height: 55px;
@@ -79,7 +86,29 @@ const SearchMenuContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  i {
-    stroke: var(--grey-500);
+  background-color: var(--grey-900);
+`;
+
+const HamburgerIconContainer = styled.i`
+  margin-top: 6px;
+  cursor: pointer;
+
+  /* hide on big screen */
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
+const DropdownContent = styled.div`
+  background-color: var(--grey-700);
+  position: absolute;
+  padding: 1em 0.75em;
+  right: 1.5em;
+  top: 3.5em;
+  z-index: 10;
+
+  a {
+    color: white;
+    display: block;
   }
 `;

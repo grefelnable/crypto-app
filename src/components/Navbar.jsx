@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 import logo from "../assets/crypto-logo.png";
 import { ReactComponent as SearchIcon } from "../assets/search-icon.svg";
 import { ReactComponent as HamburgerIcon } from "../assets/hamburger-menu.svg";
@@ -28,8 +29,22 @@ const Navbar = () => {
         </SearchMenuContainer>
         {/* Dropdown menu */}
         <DropdownContent style={{ display: `${toggleMenu ? "" : "none"}` }}>
-          <a href="#">Coins</a>
-          <a href="#">Portfolio</a>
+          <NavLink
+            to="/"
+            onClick={() => {
+              setToggleMenu(!toggleMenu);
+            }}
+          >
+            Coins
+          </NavLink>
+          <NavLink
+            to="/portfolio"
+            onClick={() => {
+              setToggleMenu(!toggleMenu);
+            }}
+          >
+            Portfolio
+          </NavLink>
         </DropdownContent>
       </SectionCenter>
     </Nav>
@@ -129,6 +144,8 @@ const DropdownContent = styled.div`
     color: var(--grey-300);
     display: block;
     transition: var(--transition);
+    letter-spacing: var(--letterSpacing);
+    text-transform: uppercase;
   }
   a:hover {
     color: var(--primary-500);

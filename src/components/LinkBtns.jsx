@@ -4,13 +4,7 @@ import { NavLink } from "react-router-dom";
 const LinkBtns = () => {
   return (
     <BtnGroup>
-      <NavLink
-        id="btn-group"
-        to="/"
-        className={({ isActive, isPending }) =>
-          isPending ? "pending" : isActive ? "active" : ""
-        }
-      >
+      <NavLink id="btn-group" to="/">
         Coins
       </NavLink>
       <NavLink to="/portfolio">Portfolio</NavLink>
@@ -29,8 +23,8 @@ const BtnGroup = styled.div`
   gap: 0.5em;
   a {
     color: var(--grey-50);
-    background-color: var(--primary-700);
     padding: 0.5em 1em;
+    border: 1px solid var(--grey-800);
     border-radius: 0.5em;
     transition: var(--transition);
   }

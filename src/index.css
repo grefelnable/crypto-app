@@ -139,7 +139,7 @@ ul {
   }
 }
 
-/* isActive Navlink */
-#btn-group a.active {
-  background: var(--primary-500);
+/* Active Class fo NavLink */
+.active {
+  background-color: var(--primary-500);
 }

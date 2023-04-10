@@ -138,3 +138,8 @@ ul {
     transform: rotate(360deg);
   }
 }
+
+/* isActive Navlink */
+#btn-group a.active {
+  background: var(--primary-500);
+}

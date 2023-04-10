@@ -14,12 +14,14 @@ const Navbar = () => {
   return (
     <Nav>
       <SectionCenter>
-        {/* LOGO */}
-        <LogoContainer>
-          <img src={logo} alt="crypto logo by grefel" className="img" />
-        </LogoContainer>
-        {/* links to different page on bigger screen */}
-        <LinkBtns />
+        <LogoBtnsContainer>
+          {/* LOGO */}
+          <LogoContainer>
+            <img src={logo} alt="crypto logo by grefel" className="img" />
+          </LogoContainer>
+          {/* links to different page on bigger screen */}
+          <LinkBtns />
+        </LogoBtnsContainer>
 
         <SearchMenuContainer>
           {/* SEARCH BAR */}
@@ -45,10 +47,6 @@ const Nav = styled.nav`
   height: 55px;
 `;
 
-const LogoContainer = styled.div`
-  width: 100px;
-`;
-
 const SectionCenter = styled.div`
   display: flex;
   align-items: center;
@@ -56,6 +54,16 @@ const SectionCenter = styled.div`
   width: 90vw;
   margin: 0 auto;
   max-width: 1170px;
+`;
+
+const LogoBtnsContainer = styled.div`
+  display: flex;
+  gap: 2em;
+  align-items: center;
+`;
+
+const LogoContainer = styled.div`
+  width: 100px;
 `;
 
 const SearchMenuContainer = styled.div`

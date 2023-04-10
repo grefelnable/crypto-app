@@ -4,9 +4,7 @@ import { NavLink } from "react-router-dom";
 const LinkBtns = () => {
   return (
     <BtnGroup>
-      <NavLink id="btn-group" to="/">
-        Coins
-      </NavLink>
+      <NavLink to="/">Coins</NavLink>
       <NavLink to="/portfolio">Portfolio</NavLink>
     </BtnGroup>
   );

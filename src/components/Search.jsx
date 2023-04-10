@@ -7,23 +7,26 @@ const Search = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   // search query
-  const [query, setQuery] = useState(null);
+  const [query, setQuery] = useState("");
 
   // Fetching data
   useEffect(() => {
-    fetch(`https://api.coingecko.com/api/v3/search?query=${query}`)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result.coins);
-          setIsLoaded(true);
-          setItems(result.coins);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(true);
-        }
-      );
+    // only fetch when user enter a query on search bar
+    if (query !== "") {
+      fetch(`https://api.coingecko.com/api/v3/search?query=${query}`)
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            console.log(result.coins);
+            setIsLoaded(true);
+            setItems(result.coins);
+          },
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        );
+    }
   }, [query]);
 
   return (
@@ -46,9 +49,9 @@ const Search = () => {
       {query ? (
         <SearchResults>
           {error ? (
-            <p>{error.message}</p>
+            <p>Error: {error.message}</p>
           ) : !isLoaded ? (
-            <li>Loading...</li>
+            <div className="loading"></div>
           ) : (
             items.map((item) => <li key={item.id}>{item.name}</li>)
           )}
@@ -101,8 +104,4 @@ const SearchResults = styled.ul`
   right: 4em;
   top: 2.25em;
   z-index: 10;
-
-  p {
-    color: black;
-  }
 `;

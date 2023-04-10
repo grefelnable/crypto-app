@@ -7,8 +7,7 @@ const Search = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   // search query
-  const [query, setQuery] = useState("");
-  const [searchParam] = useState([]);
+  const [query, setQuery] = useState(null);
 
   // Fetching data
   useEffect(() => {
@@ -25,18 +24,8 @@ const Search = () => {
           setError(true);
         }
       );
-  }, []);
-  // function to filter results
-  function search(items) {
-    return items.filter((item) => {
-      return searchParam.some((newItem) => {
-        return (
-          item[newItem].toString().toLowercase().indexof(query.toLowerCase()) >
-          -1
-        );
-      });
-    });
-  }
+  }, [query]);
+
   return (
     <>
       {/* Search bar */}
@@ -54,11 +43,15 @@ const Search = () => {
         </i>
         {/* Result contents */}
       </Container>
-      {query === "" || query === null ? (
+      {query ? (
         <SearchResults>
-          {items.map((item) => (
-            <li key={item.id}>{item.name}</li>
-          ))}
+          {error ? (
+            <p>{error.message}</p>
+          ) : !isLoaded ? (
+            <li>Loading...</li>
+          ) : (
+            items.map((item) => <li key={item.id}>{item.name}</li>)
+          )}
         </SearchResults>
       ) : (
         ""
@@ -108,4 +101,8 @@ const SearchResults = styled.ul`
   right: 4em;
   top: 2.25em;
   z-index: 10;
+
+  p {
+    color: black;
+  }
 `;

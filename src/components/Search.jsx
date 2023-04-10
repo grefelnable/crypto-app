@@ -93,6 +93,8 @@ const Container = styled.form`
 
 const SearchResults = styled.ul`
   color: var(--grey-900);
+  max-height: 250px;
+  overflow: scroll;
   width: 211px;
   border-radius: 0.5em;
   background-color: var(--grey-100);

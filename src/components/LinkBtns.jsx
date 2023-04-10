@@ -17,8 +17,8 @@ const BtnGroup = styled.div`
   /* display on bigger screen */
   @media screen and (min-width: 768px) {
     display: flex;
+    gap: 0.5em;
   }
-  gap: 0.5em;
   a {
     color: var(--grey-50);
     padding: 0.5em 1em;

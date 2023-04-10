@@ -122,3 +122,19 @@ ul {
   display: block;
   object-fit: cover;
 }
+/* loading animation */
+.loading {
+  width: 4rem;
+  height: 4rem;
+  border: 3px solid var(--grey-300);
+  border-radius: 50%;
+  border-top-color: var(--primary-500);
+  animation: spinner 0.8s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

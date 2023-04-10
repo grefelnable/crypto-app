@@ -4,6 +4,7 @@ import { ReactComponent as HamburgerIcon } from "../assets/hamburger-menu.svg";
 import { useState } from "react";
 import DropDownContent from "./DropDownContent";
 import Search from "./Search";
+import LinkBtns from "./LinkBtns";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -17,6 +18,9 @@ const Navbar = () => {
         <LogoContainer>
           <img src={logo} alt="crypto logo by grefel" className="img" />
         </LogoContainer>
+        {/* links to different page on bigger screen */}
+        <LinkBtns />
+
         <SearchMenuContainer>
           {/* SEARCH BAR */}
           <Search />

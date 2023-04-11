@@ -11,34 +11,21 @@ html {
 
 :root {
   /* colors */
-  --primary-100: #ffefd5;
-  --primary-200: #ffdfab;
-  --primary-300: #ffcf80;
-  --primary-400: #ffbf56;
-  --primary-500: #ffaf2c;
-  --primary-600: #cc8c23;
-  --primary-700: #99691a;
-  --primary-800: #664612;
-  --primary-900: #332309;
 
   /* grey */
-  --grey-50: #f9fafb;
-  --grey-100: #f3f4f6;
-  --grey-200: #e5e7eb;
-  --grey-300: #d1d5db;
-  --grey-400: #9ca3af;
-  --grey-500: #6b7280;
-  --grey-600: #4b5563;
-  --grey-700: #374151;
-  --grey-800: #1f2937;
-  --grey-900: #111827;
+  --grey-50: #f8fafc;
+  --grey-100: #f1f5f9;
+  --grey-200: #e2e8f0;
+  --grey-300: #cbd5e1;
+  --grey-400: #94a3b8;
+  --grey-500: #64748b;
+  --grey-600: #475569;
+  --grey-700: #334155;
+  --grey-800: #1e293b;
+  --grey-900: #0f172a;
 
   --black: #222;
   --white: #fff;
-  --red-light: #f8d7da;
-  --red-dark: #842029;
-  --green-light: #d1e7dd;
-  --green-dark: #0f5132;
 
   /* box shadows */
   --shadow-1: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
@@ -126,9 +113,9 @@ ul {
 .loading {
   width: 4rem;
   height: 4rem;
-  border: 3px solid var(--grey-300);
+  border: 3px solid var(--grey-100);
   border-radius: 50%;
-  border-top-color: var(--primary-500);
+  border-top-color: var(--grey-500);
   animation: spinner 0.8s linear infinite;
   margin: 0 auto;
 }
@@ -141,5 +128,5 @@ ul {
 
 /* Active Class fo NavLink */
 .active {
-  background-color: var(--primary-500);
+  background-color: var(--grey-500);
 }

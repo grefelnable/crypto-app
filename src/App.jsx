@@ -7,13 +7,18 @@ import Home from "./pages/Home";
 import Error from "./pages/Error";
 import SharedLayout from "./components/SharedLayout";
 import Portfolio from "./pages/Portfolio";
+import { useEffect } from "react";
 
 function App() {
   // Get theme from store
   const theme = useSelector((state) => state.theme);
 
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
   return (
-    <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
+    <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <>
         <GlobalStyles />
         <Routes>

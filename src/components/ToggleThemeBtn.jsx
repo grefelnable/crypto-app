@@ -1,15 +1,17 @@
-import { useDispatch } from "react-redux";
-import { toggleTheme } from "../redux/theme/themeSlice";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { ReactComponent as ToggleIcon } from "../assets/toggle-icon.svg";
+import { toggleTheme } from "../redux/theme/themeSlice";
 
 const ToggleThemeBtn = () => {
+  const theme = useSelector((state) => state.theme);
   // initialize dispatch variable
   const dispatch = useDispatch();
 
   // toggle btn
   const handleToggleClick = () => {
-    dispatch(toggleTheme());
+    const themeMode = theme === "dark" ? "light" : "dark";
+    dispatch(toggleTheme(themeMode));
   };
   return (
     <ThemeBtn onClick={handleToggleClick}>

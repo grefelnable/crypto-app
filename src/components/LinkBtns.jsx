@@ -4,8 +4,8 @@ import { NavLink } from "react-router-dom";
 const LinkBtns = () => {
   return (
     <BtnGroup>
-      <NavLink to="/">Coins</NavLink>
-      <NavLink to="/portfolio">Portfolio</NavLink>
+      <StyledNavLink to="/">Coins</StyledNavLink>
+      <StyledNavLink to="/portfolio">Portfolio</StyledNavLink>
     </BtnGroup>
   );
 };
@@ -19,14 +19,12 @@ const BtnGroup = styled.div`
     display: flex;
     gap: 0.5em;
   }
-  a {
-    color: var(--grey-100);
-    padding: 0.5em 1em;
-    border: 1px solid var(--grey-100);
-    border-radius: 0.5em;
-    transition: var(--transition);
-  }
-  a:hover {
-    background-color: var(--grey-300);
-  }
+`;
+
+const StyledNavLink = styled(NavLink)`
+  color: var(--grey-200);
+  padding: 0.5em 1em;
+  border: 1px solid var(--grey-800);
+  border-radius: 0.5em;
+  transition: var(--transition);
 `;

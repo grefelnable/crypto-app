@@ -128,5 +128,5 @@ ul {
 
 /* Active Class fo NavLink */
 .active {
-  background-color: var(--grey-500);
+  background-color: var(--grey-800);
 }

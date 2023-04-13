@@ -35,15 +35,13 @@ const Search = () => {
       <Container>
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search..."
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
           }}
         />
-        <i>
-          <SearchIcon />
-        </i>
+        <StyledSearchIcon />
         {/* Result contents */}
       </Container>
       {query ? (
@@ -69,26 +67,27 @@ const Container = styled.form`
   position: relative;
   input {
     color: var(--grey-500);
-    background-color: var(--grey-900);
-    padding-top: 8px;
-    padding-bottom: 8px;
+    background-color: var(--grey-800);
+    padding-top: 12px;
+    padding-bottom: 12px;
     padding-left: 2.5rem;
-    border: 1px solid var(--grey-600);
-    border-radius: 1rem;
+    border: transparent;
+    border-radius: 0.5rem;
     outline: none;
   }
   input::placeholder {
-    color: var(--grey-500);
+    color: var(--grey-200);
   }
-  /* search icon */
-  i {
-    stroke: var(--grey-500);
-    display: block;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-45%);
-    left: 15px;
-  }
+`;
+
+const StyledSearchIcon = styled(SearchIcon)`
+  fill: var(--grey-200);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  height: 24px;
+  width: 24px;
 `;
 
 const SearchResults = styled.ul`

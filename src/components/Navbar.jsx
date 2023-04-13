@@ -74,6 +74,8 @@ const SearchMenuContainer = styled.div`
   align-items: center;
   gap: 1rem;
   background-color: ${({ theme }) => theme.body};
+  // to make smooth transition on theme change
+  transition: var(--transition);
 `;
 
 const HamburgerIconContainer = styled.i`

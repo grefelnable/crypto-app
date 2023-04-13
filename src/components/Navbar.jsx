@@ -12,6 +12,7 @@ const Navbar = () => {
   const handleMenuClick = () => {
     return setToggleMenu(!toggleMenu);
   };
+
   return (
     <Nav>
       <SectionCenter>
@@ -72,7 +73,7 @@ const SearchMenuContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  background-color: var(--grey-900);
+  background-color: ${({ theme }) => theme.body};
 `;
 
 const HamburgerIconContainer = styled.i`

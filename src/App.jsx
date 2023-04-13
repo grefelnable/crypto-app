@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 import { lightTheme, darkTheme } from "./theme/Theme";
 import { GlobalStyles } from "./theme/Global";
 import Home from "./pages/Home";
@@ -8,8 +9,11 @@ import SharedLayout from "./components/SharedLayout";
 import Portfolio from "./pages/Portfolio";
 
 function App() {
+  // Get theme from store
+  const theme = useSelector((state) => state.theme);
+
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme.darkTheme ? darkTheme : lightTheme}>
       <>
         <GlobalStyles />
         <Routes>

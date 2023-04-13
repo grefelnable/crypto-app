@@ -94,7 +94,7 @@ const SearchResults = styled.ul`
   color: var(--grey-900);
   max-height: 250px;
   overflow: scroll;
-  width: 211px;
+  width: 200px;
   border-radius: 0.5em;
   background-color: var(--grey-100);
   position: absolute;
@@ -102,7 +102,7 @@ const SearchResults = styled.ul`
   position: absolute;
   padding: 1em 2em;
   padding-left: 1em;
-  right: 4em;
-  top: 2.25em;
+  right: 9.25em;
+  top: 2.85em;
   z-index: 10;
 `;

@@ -20,13 +20,13 @@ const BtnGroup = styled.div`
     gap: 0.5em;
   }
   a {
-    color: var(--grey-50);
+    color: var(--grey-100);
     padding: 0.5em 1em;
-    border: 1px solid var(--grey-800);
+    border: 1px solid var(--grey-100);
     border-radius: 0.5em;
     transition: var(--transition);
   }
   a:hover {
-    background-color: var(--primary-500);
+    background-color: var(--grey-300);
   }
 `;

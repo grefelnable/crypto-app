@@ -5,6 +5,7 @@ import { useState } from "react";
 import DropDownContent from "./DropDownContent";
 import Search from "./Search";
 import LinkBtns from "./LinkBtns";
+import ToggleThemeBtn from "./ToggleThemeBtn";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -26,7 +27,9 @@ const Navbar = () => {
         <SearchMenuContainer>
           {/* SEARCH BAR */}
           <Search />
-          {/* HAMBURGER MENU */}
+          {/* TOGGLE THEME */}
+          <ToggleThemeBtn />
+          {/* HAMBURGER MENU on Small screen*/}
           <HamburgerIconContainer onClick={handleMenuClick}>
             <HamburgerIcon />
           </HamburgerIconContainer>
@@ -42,9 +45,10 @@ export default Navbar;
 // CSS
 
 const Nav = styled.nav`
+  border: 1px solid magenta;
   display: flex;
   align-items: center;
-  height: 55px;
+  height: 97px;
 `;
 
 const SectionCenter = styled.div`

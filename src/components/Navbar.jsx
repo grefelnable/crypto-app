@@ -23,7 +23,6 @@ const Navbar = () => {
           {/* links to different page on bigger screen */}
           <LinkBtns />
         </LogoBtnsContainer>
-
         <SearchMenuContainer>
           {/* SEARCH BAR */}
           <Search />
@@ -45,10 +44,9 @@ export default Navbar;
 // CSS
 
 const Nav = styled.nav`
-  border: 1px solid magenta;
   display: flex;
   align-items: center;
-  height: 97px;
+  height: 65px;
 `;
 
 const SectionCenter = styled.div`

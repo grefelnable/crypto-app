@@ -72,7 +72,7 @@ const Container = styled.form`
     padding-bottom: 12px;
     padding-left: 2.5rem;
     border: transparent;
-    border-radius: 0.5rem;
+    border-radius: 0.5em;
     outline: none;
   }
   input::placeholder {

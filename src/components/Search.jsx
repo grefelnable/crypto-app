@@ -64,10 +64,12 @@ export default Search;
 
 const Container = styled.form`
   border: none;
+  border-radius: 0.5em;
   position: relative;
+  box-shadow: var(--shadow-1);
   input {
-    color: var(--grey-500);
-    background-color: var(--grey-800);
+    color: ${({ theme }) => theme.text};
+    background-color: ${({ theme }) => theme.backgroundVariant};
     padding-top: 12px;
     padding-bottom: 12px;
     padding-left: 2.5rem;
@@ -76,12 +78,12 @@ const Container = styled.form`
     outline: none;
   }
   input::placeholder {
-    color: var(--grey-200);
+    color: ${({ theme }) => theme.text};
   }
 `;
 
 const StyledSearchIcon = styled(SearchIcon)`
-  fill: var(--grey-200);
+  fill: ${({ theme }) => theme.text};
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

@@ -23,6 +23,7 @@ export default ToggleThemeBtn;
 
 const ThemeBtn = styled.button`
   cursor: pointer;
+  box-shadow: var(--shadow-1);
   border: none;
   border-radius: 0.5em;
   background-color: ${({ theme }) => theme.toggleBtn};

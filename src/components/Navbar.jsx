@@ -1,24 +1,36 @@
 import styled from "styled-components";
-import logo from "../assets/crypto-logo.png";
+import logo from "../assets/logo-variant.png";
 import { ReactComponent as HamburgerIcon } from "../assets/hamburger-menu.svg";
 import { useState } from "react";
 import DropDownContent from "./DropDownContent";
 import Search from "./Search";
 import LinkBtns from "./LinkBtns";
 import ToggleThemeBtn from "./ToggleThemeBtn";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const handleMenuClick = () => {
     return setToggleMenu(!toggleMenu);
   };
-
+  // Get theme from store
+  const theme = useSelector((state) => state.theme);
+  console.log(theme);
   return (
     <Nav>
       <SectionCenter>
         <LogoBtnsContainer>
           {/* LOGO */}
           <LogoContainer>
+            {/* {theme === "dark" ? (
+              <img
+                src={lightLogo}
+                alt="crypto logo by grefel"
+                className="img"
+              />
+            ) : (
+              <img src={darkLogo} alt="crypto logo by grefel" className="img" />
+            )} */}
             <img src={logo} alt="crypto logo by grefel" className="img" />
           </LogoContainer>
           {/* links to different page on bigger screen */}

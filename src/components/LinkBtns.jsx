@@ -4,10 +4,10 @@ import { NavLink } from "react-router-dom";
 const LinkBtns = () => {
   return (
     <BtnGroup>
-      <StyledNavLink activeClassName="active" to="/">
+      <StyledNavLink active="active" to="/">
         Coins
       </StyledNavLink>
-      <StyledNavLink activeClassName="active" to="/portfolio">
+      <StyledNavLink active="active" to="/portfolio">
         Portfolio
       </StyledNavLink>
     </BtnGroup>
@@ -34,7 +34,7 @@ const StyledNavLink = styled(NavLink)`
   transition: var(--transition);
 
   /* active className */
-  &.${(props) => props.activeClassName} {
+  &.${(props) => props.active} {
     background-color: ${({ theme }) => theme.backgroundVariant};
   }
 `;

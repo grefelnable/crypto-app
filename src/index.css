@@ -125,8 +125,3 @@ ul {
     transform: rotate(360deg);
   }
 }
-
-/* Active Class fo NavLink */
-.active {
-  background-color: var(--grey-800);
-}

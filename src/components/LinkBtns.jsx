@@ -4,8 +4,12 @@ import { NavLink } from "react-router-dom";
 const LinkBtns = () => {
   return (
     <BtnGroup>
-      <StyledNavLink to="/">Coins</StyledNavLink>
-      <StyledNavLink to="/portfolio">Portfolio</StyledNavLink>
+      <StyledNavLink activeClassName="active" to="/">
+        Coins
+      </StyledNavLink>
+      <StyledNavLink activeClassName="active" to="/portfolio">
+        Portfolio
+      </StyledNavLink>
     </BtnGroup>
   );
 };
@@ -22,9 +26,15 @@ const BtnGroup = styled.div`
 `;
 
 const StyledNavLink = styled(NavLink)`
-  color: var(--grey-200);
+  color: ${({ theme }) => theme.text};
+  box-shadow: var(--shadow-1);
   padding: 0.5em 1em;
-  border: 1px solid var(--grey-800);
+  border: 1px solid ${({ theme }) => theme.backgroundVariant};
   border-radius: 0.5em;
   transition: var(--transition);
+
+  /* active className */
+  &.${(props) => props.activeClassName} {
+    background-color: ${({ theme }) => theme.backgroundVariant};
+  }
 `;

@@ -27,6 +27,7 @@ const ThemeBtn = styled.button`
   border-radius: 0.5em;
   background-color: ${({ theme }) => theme.toggleBtn};
   padding: 7px 10px;
+  transition: var(--transition);
 `;
 
 const StyledToggleIcon = styled(ToggleIcon)`

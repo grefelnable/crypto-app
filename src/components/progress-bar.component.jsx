@@ -14,6 +14,7 @@ const ProgressBar = (props) => {
 export default ProgressBar;
 
 const Container = styled.div`
+  display: inline-block;
   height: 13px;
   width: 55px;
   background-color: var(--blue);

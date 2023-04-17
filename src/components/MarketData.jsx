@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { formatCompactNumber } from "../utils/FormatNumber";
 import styled from "styled-components";
 import ProgressBar from "./progress-bar.component";
+import btcImage from "../assets/bitcoin.png";
+import ethImage from "../assets/eth.png";
 
 const MarketData = () => {
   const [totalMarketCap, setTotalMarketCap] = useState(0);
@@ -38,11 +40,11 @@ const MarketData = () => {
       <li>•${formatCompactNumber(totalMarketCap)}</li>
       <li>•${formatCompactNumber(totalVolume)}</li>
       <li>
-        BTC: {btcMarketCapPercentage}%{" "}
+        <img src={btcImage} alt="btc image" /> {btcMarketCapPercentage}%{" "}
         <ProgressBar percentage={btcMarketCapPercentage} />
       </li>
       <li>
-        ETH: {ethMarketCapPercentage}%{" "}
+        <img src={ethImage} alt="eth image" /> {ethMarketCapPercentage}%{" "}
         <ProgressBar percentage={ethMarketCapPercentage} />
       </li>
     </Container>
@@ -51,7 +53,18 @@ const MarketData = () => {
 export default MarketData;
 
 const Container = styled.ul`
+  width: fit-content;
   margin: 0 auto;
-  border: 1px solid magenta;
   background: ${({ theme }) => theme.navbarBackground};
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 0.5em 1em;
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
+  }
 `;

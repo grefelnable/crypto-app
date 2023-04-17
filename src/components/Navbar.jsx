@@ -49,6 +49,7 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   height: 65px;
+  background-color: ${({ theme }) => theme.navbarBackground};
 `;
 
 const SectionCenter = styled.div`
@@ -74,7 +75,7 @@ const SearchMenuContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  background-color: ${({ theme }) => theme.body};
+  background-color: ${({ theme }) => theme.navbarBackground};
 `;
 
 const HamburgerIconContainer = styled.i`

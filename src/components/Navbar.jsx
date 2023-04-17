@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import logo from "../assets/logo-variant.png";
+import logo from "../assets/logo.png";
 import { ReactComponent as HamburgerIcon } from "../assets/hamburger-menu.svg";
 import { useState } from "react";
 import DropDownContent from "./DropDownContent";
 import Search from "./Search";
 import LinkBtns from "./LinkBtns";
 import ToggleThemeBtn from "./ToggleThemeBtn";
-import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);

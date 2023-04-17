@@ -13,24 +13,13 @@ const Navbar = () => {
   const handleMenuClick = () => {
     return setToggleMenu(!toggleMenu);
   };
-  // Get theme from store
-  const theme = useSelector((state) => state.theme);
-  console.log(theme);
+
   return (
     <Nav>
       <SectionCenter>
         <LogoBtnsContainer>
           {/* LOGO */}
           <LogoContainer>
-            {/* {theme === "dark" ? (
-              <img
-                src={lightLogo}
-                alt="crypto logo by grefel"
-                className="img"
-              />
-            ) : (
-              <img src={darkLogo} alt="crypto logo by grefel" className="img" />
-            )} */}
             <img src={logo} alt="crypto logo by grefel" className="img" />
           </LogoContainer>
           {/* links to different page on bigger screen */}

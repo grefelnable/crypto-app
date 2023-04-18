@@ -18,7 +18,6 @@ const MarketData = () => {
     const fetchMarketData = async () => {
       const response = await fetch("https://api.coingecko.com/api/v3/global");
       const items = await response.json();
-      console.log(items);
       setCoins(items.data.active_cryptocurrencies);
       setExchange(items.data.markets);
       setTotalMarketCap(items.data.total_market_cap.usd);

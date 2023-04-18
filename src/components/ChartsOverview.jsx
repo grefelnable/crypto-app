@@ -50,6 +50,23 @@ const ChartsOverview = () => {
         display: false,
       },
     },
+    scales: {
+      x: {
+        display: true,
+        grid: {
+          display: false,
+          drawBorder: false,
+        },
+      },
+      y: {
+        display: false,
+        grid: {
+          display: false,
+          drawBorder: false,
+        },
+      },
+    },
+    tension: 0.5,
   };
 
   const data = {

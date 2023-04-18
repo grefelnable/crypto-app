@@ -87,6 +87,7 @@ const ChartsOverview = () => {
           gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
           return gradient;
         },
+        pointRadius: 0,
       },
     ],
   };
@@ -96,9 +97,11 @@ const ChartsOverview = () => {
     return <div className="loading"></div>;
   }
   return (
-    <div>
+    <Container>
       <Line options={options} data={data} />
-    </div>
+    </Container>
   );
 };
 export default ChartsOverview;
+
+const Container = styled.article``;

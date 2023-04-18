@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import ChartsOverview from "../components/ChartsOverview";
+import BitcoinChart from "../components/AreaChartBtc";
 
 const Home = () => {
   return (
     <Container>
       <h2>Your Overview</h2>
-      <ChartsOverview />
+      <BitcoinChart />
     </Container>
   );
 };

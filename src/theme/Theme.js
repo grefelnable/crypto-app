@@ -5,6 +5,11 @@ export const lightTheme = {
   backgroundVariant: "var(--grey-200)",
   toggleBtn: "var(--grey-200)",
   navbarBackground: "var(--grey-100)",
+  chartBorderColor: "#2172E5",
+  chartsGradient: {
+    start: "rgba(37,80,234, 0)",
+    end: "rgba(37,80,234, 0.56)",
+  },
 };
 
 export const darkTheme = {
@@ -14,4 +19,9 @@ export const darkTheme = {
   backgroundVariant: "var(--grey-800)",
   toggleBtn: "var(--grey-700)",
   navbarBackground: "var(--grey-900)",
+  chartBorderColor: "#1AD761",
+  chartsGradient: {
+    start: "rgba(0, 0, 0, 0.0)",
+    end: "rgba(0, 255, 95, .5)",
+  },
 };

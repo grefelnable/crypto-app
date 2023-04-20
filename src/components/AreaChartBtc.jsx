@@ -82,7 +82,7 @@ const ChartsOverview = () => {
         // gradient background
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 0, 0, 1000);
+          const gradient = ctx.createLinearGradient(0, 0, 0, 150);
           gradient.addColorStop(0, "rgba(0, 255, 95, .5)");
           gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
           return gradient;
@@ -104,4 +104,6 @@ const ChartsOverview = () => {
 };
 export default ChartsOverview;
 
-const Container = styled.article``;
+const Container = styled.article`
+  /* background-color: black; */
+`;

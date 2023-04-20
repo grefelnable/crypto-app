@@ -64,7 +64,7 @@ export default Search;
 
 const Container = styled.form`
   border: none;
-  border-radius: 0.5em;
+  border-radius: var(--borderRadius);
   position: relative;
   box-shadow: var(--shadow-1);
   input {

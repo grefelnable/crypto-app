@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import moment from "moment";
 import {
   Chart as ChartJS,
@@ -27,6 +27,8 @@ ChartJS.register(
 const url =
   "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily";
 const ChartsOverview = () => {
+  const theme = useTheme();
+  const [themeChange, setThemeChange] = useState(theme);
   const [isLoaded, setIsLoaded] = useState(false);
   const [coinData, setCoinData] = useState([{}]);
   // Fetch data for charts
@@ -71,18 +73,18 @@ const ChartsOverview = () => {
 
   const data = {
     // x-axis
-    labels: coinData.map((value) => moment(value.x).format("MMM DD")),
+    labels: coinData.map((value) => moment(value.x).format("DD")),
     datasets: [
       {
         fill: true,
         label: "Bitcoin",
         data: coinData.map((value) => value.y),
-        borderColor: "#00FF5F",
-        // backgroundColor: "rgba(0, 255, 95,.5)",
+        // borderColor: "#00FF5F",
+        borderColor: `${({ themeChange }) => themeChange.text}`,
         // gradient background
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 0, 0, 150);
+          const gradient = ctx.createLinearGradient(0, 0, 0, 680);
           gradient.addColorStop(0, "rgba(0, 255, 95, .5)");
           gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
           return gradient;
@@ -92,18 +94,20 @@ const ChartsOverview = () => {
     ],
   };
 
-  // loading screen
-  if (!isLoaded) {
-    return <div className="loading"></div>;
-  }
   return (
     <Container>
-      <Line options={options} data={data} />
+      <h2>Bitcoin</h2>
+      {!isLoaded ? (
+        <div className="loading"></div>
+      ) : (
+        <Line options={options} data={data} />
+      )}
     </Container>
   );
 };
 export default ChartsOverview;
 
 const Container = styled.article`
-  /* background-color: black; */
+  border-radius: var(--borderRadius);
+  background-color: ${({ theme }) => theme.background};
 `;

@@ -24,7 +24,7 @@ ChartJS.register(
   Legend
 );
 
-const ChartsOverview = ({ coinData, isLoaded }) => {
+const ChartsOverview = ({ coinData, isLoaded, lastUpdate }) => {
   const theme = useTheme();
 
   const options = {
@@ -76,7 +76,11 @@ const ChartsOverview = ({ coinData, isLoaded }) => {
 
   return (
     <Container>
-      <h2>Bitcoin</h2>
+      <ChartInformation>
+        <h2>Bitcoin</h2>
+        <BtcPrice>23000</BtcPrice>
+        <span>{lastUpdate}</span>
+      </ChartInformation>
       {!isLoaded ? (
         <div className="loading"></div>
       ) : (
@@ -90,4 +94,19 @@ export default ChartsOverview;
 const Container = styled.article`
   border-radius: var(--borderRadius);
   background-color: ${({ theme }) => theme.background};
+`;
+const ChartInformation = styled.div`
+  padding: 1em;
+  margin-bottom: -1em;
+  h2 {
+    font-size: 1.375rem;
+    margin-bottom: 0;
+  }
+  span {
+    display: block;
+  }
+`;
+
+const BtcPrice = styled.span`
+  font-size: 2.75rem;
 `;

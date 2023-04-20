@@ -20,7 +20,12 @@ ChartJS.register(
   Legend
 );
 
-const BarChartBtc = ({ isLoaded, coinVolume, btcCurrentVolume }) => {
+const BarChartBtc = ({
+  isLoaded,
+  coinVolume,
+  btcCurrentVolume,
+  volumeLastUpdate,
+}) => {
   const theme = useTheme();
 
   const options = {
@@ -66,7 +71,7 @@ const BarChartBtc = ({ isLoaded, coinVolume, btcCurrentVolume }) => {
       <ChartInformation>
         <h2>Volume 24h</h2>
         <BtcVolume>$ {btcCurrentVolume}</BtcVolume>
-        {/* <LastUpdate>{lastUpdate}</LastUpdate> */}
+        <LastUpdate>{volumeLastUpdate}</LastUpdate>
       </ChartInformation>
       {!isLoaded ? (
         <div className="loading"></div>
@@ -102,6 +107,6 @@ const BtcVolume = styled.span`
   font-size: 2.75rem;
 `;
 
-// const LastUpdate = styled.span`
-//   font-size: 1.375rem;
-// `;
+const LastUpdate = styled.span`
+  font-size: 1.375rem;
+`;

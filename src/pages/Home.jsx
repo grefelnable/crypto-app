@@ -14,6 +14,7 @@ const Home = () => {
   const [btcCurrentPrice, setBtcCurrentPrice] = useState(0);
   const [coinVolume, setCoinVolume] = useState([{}]);
   const [btcCurrentVolume, setBtcCurrentVolume] = useState(0);
+  const [volumeLastUpdate, setVolumeLastUpdate] = useState(0);
   // Fetch data for charts
   useEffect(() => {
     const fetchBitcoinData = async () => {
@@ -28,13 +29,14 @@ const Home = () => {
         y: value[1].toFixed(2),
       }));
       // console log
-      console.log(formatCompactNumber(itemsVolume[180].y));
+      console.log(volumeLastUpdate);
       setIsLoaded(true);
       setLastUpdate(moment(itemsPrices[180].x).format("MMM DD YYYY"));
       setCoinData(itemsPrices);
       setCoinVolume(itemsVolume);
       setBtcCurrentPrice(Number(itemsPrices[180].y).toLocaleString("en-US"));
       setBtcCurrentVolume(formatCompactNumber(itemsVolume[180].y));
+      setVolumeLastUpdate(moment(itemsVolume[180].x).format("MMM DD YYYY"));
     };
     fetchBitcoinData().catch(console.error);
   }, []);
@@ -53,6 +55,7 @@ const Home = () => {
           coinVolume={coinVolume}
           isLoaded={isLoaded}
           btcCurrentVolume={btcCurrentVolume}
+          volumeLastUpdate={volumeLastUpdate}
         />
       </ChartWrapper>
     </Container>

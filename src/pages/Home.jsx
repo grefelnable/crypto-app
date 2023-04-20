@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import BitcoinChart from "../components/AreaChartBtc";
 import moment from "moment";
+import BarChartBtc from "../components/BarChartBtc";
 
 const url =
   "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=current";
@@ -30,12 +31,15 @@ const Home = () => {
   return (
     <Container>
       <h2>Your Overview</h2>
-      <BitcoinChart
-        coinData={coinData}
-        isLoaded={isLoaded}
-        lastUpdate={lastUpdate}
-        btcCurrentPrice={btcCurrentPrice}
-      />
+      <ChartWrapper>
+        <BitcoinChart
+          coinData={coinData}
+          isLoaded={isLoaded}
+          lastUpdate={lastUpdate}
+          btcCurrentPrice={btcCurrentPrice}
+        />
+        <BarChartBtc />
+      </ChartWrapper>
     </Container>
   );
 };
@@ -45,4 +49,9 @@ const Container = styled.main`
   h2 {
     font-size: 1.375rem;
   }
+`;
+
+const ChartWrapper = styled.div`
+  display: flex;
+  gap: 2.875em;
 `;

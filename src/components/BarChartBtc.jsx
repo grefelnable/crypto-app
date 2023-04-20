@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,6 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import moment from "moment";
 
 ChartJS.register(
   CategoryScale,
@@ -19,39 +20,59 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {},
-    title: {
-      display: true,
-      text: "Chart.js Bar Chart",
-    },
-  },
-};
+const BarChartBtc = ({ isLoaded, coinVolume, btcCurrentVolume }) => {
+  const theme = useTheme();
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Dataset 1",
-      // data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
     },
-    {
-      label: "Dataset 2",
-      // data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
+    scales: {
+      x: {
+        display: true,
+        grid: {
+          display: false,
+          drawBorder: false,
+        },
+      },
+      y: {
+        display: false,
+        grid: {
+          display: false,
+          drawBorder: false,
+        },
+      },
     },
-  ],
-};
+  };
 
-const BarChartBtc = () => {
+  const data = {
+    // x-axis
+    labels: coinVolume.map((value) => moment(value.x).format("DD")),
+    datasets: [
+      {
+        fill: true,
+        label: "Bitcoin Volume",
+        data: coinVolume.map((value) => value.y),
+        backgroundColor: theme.chartBarColor,
+      },
+    ],
+  };
+
   return (
     <Container>
-      <Bar options={options} data={data} />
+      <ChartInformation>
+        <h2>Volume 24h</h2>
+        <BtcVolume>$ {btcCurrentVolume}</BtcVolume>
+        {/* <LastUpdate>{lastUpdate}</LastUpdate> */}
+      </ChartInformation>
+      {!isLoaded ? (
+        <div className="loading"></div>
+      ) : (
+        <Bar options={options} data={data} />
+      )}
     </Container>
   );
 };
@@ -64,3 +85,23 @@ const Container = styled.article`
   background-color: ${({ theme }) => theme.background};
   width: 100%;
 `;
+
+const ChartInformation = styled.div`
+  padding: 1em;
+  margin-bottom: -2em;
+  h2 {
+    font-size: 1.375rem;
+    margin-bottom: 0;
+  }
+  span {
+    display: block;
+  }
+`;
+
+const BtcVolume = styled.span`
+  font-size: 2.75rem;
+`;
+
+// const LastUpdate = styled.span`
+//   font-size: 1.375rem;
+// `;

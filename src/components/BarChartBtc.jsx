@@ -93,6 +93,9 @@ const Container = styled.article`
   border-radius: var(--borderRadius);
   background-color: ${({ theme }) => theme.background};
   width: 100%;
+  .loading {
+    border-top: 3px solid ${({ theme }) => theme.text};
+  }
 `;
 
 const ChartInformation = styled.div`

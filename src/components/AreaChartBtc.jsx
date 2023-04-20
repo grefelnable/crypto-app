@@ -24,7 +24,12 @@ ChartJS.register(
   Legend
 );
 
-const ChartsOverview = ({ coinData, isLoaded, lastUpdate }) => {
+const ChartsOverview = ({
+  coinData,
+  isLoaded,
+  lastUpdate,
+  btcCurrentPrice,
+}) => {
   const theme = useTheme();
 
   const options = {
@@ -78,7 +83,7 @@ const ChartsOverview = ({ coinData, isLoaded, lastUpdate }) => {
     <Container>
       <ChartInformation>
         <h2>Bitcoin</h2>
-        <BtcPrice>23000</BtcPrice>
+        <BtcPrice>$ {btcCurrentPrice}</BtcPrice>
         <span>{lastUpdate}</span>
       </ChartInformation>
       {!isLoaded ? (

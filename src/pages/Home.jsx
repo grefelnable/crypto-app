@@ -9,6 +9,7 @@ const Home = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [coinData, setCoinData] = useState([{}]);
   const [lastUpdate, setLastUpdate] = useState(0);
+  const [btcCurrentPrice, setBtcCurrentPrice] = useState("");
   // Fetch data for charts
   useEffect(() => {
     const fetchBitcoinData = async () => {
@@ -21,12 +22,12 @@ const Home = () => {
       setLastUpdate(moment(items[180].x).format("MMM DD YYYY"));
       setIsLoaded(true);
       setCoinData(items);
-
-      console.log(lastUpdate);
+      setBtcCurrentPrice(Number(items[180].y).toLocaleString("en-US"));
     };
     fetchBitcoinData().catch(console.error);
   }, []);
-
+  // console log
+  console.log(btcCurrentPrice);
   return (
     <Container>
       <h2>Your Overview</h2>
@@ -34,6 +35,7 @@ const Home = () => {
         coinData={coinData}
         isLoaded={isLoaded}
         lastUpdate={lastUpdate}
+        btcCurrentPrice={btcCurrentPrice}
       />
     </Container>
   );

@@ -46,6 +46,10 @@ const ChartsOverview = ({
           display: false,
           drawBorder: false,
         },
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 20,
+        },
       },
       y: {
         display: false,

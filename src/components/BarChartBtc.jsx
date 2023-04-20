@@ -42,6 +42,10 @@ const BarChartBtc = ({
           display: false,
           drawBorder: false,
         },
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 20,
+        },
       },
       y: {
         display: false,

@@ -24,27 +24,9 @@ ChartJS.register(
   Legend
 );
 
-const url =
-  "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily";
-const ChartsOverview = () => {
+const ChartsOverview = ({ coinData, isLoaded }) => {
   const theme = useTheme();
-  const [themeChange, setThemeChange] = useState(theme);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [coinData, setCoinData] = useState([{}]);
-  // Fetch data for charts
-  useEffect(() => {
-    const fetchBitcoinData = async () => {
-      const response = await fetch(url);
-      const data = await response.json();
-      const items = data.prices.map((value) => ({
-        x: value[0],
-        y: value[1].toFixed(2),
-      }));
-      setIsLoaded(true);
-      setCoinData(items);
-    };
-    fetchBitcoinData().catch(console.error);
-  }, []);
+
   const options = {
     responsive: true,
     plugins: {
@@ -70,7 +52,6 @@ const ChartsOverview = () => {
     },
     tension: 0.5,
   };
-
   const data = {
     // x-axis
     labels: coinData.map((value) => moment(value.x).format("DD")),
@@ -79,14 +60,13 @@ const ChartsOverview = () => {
         fill: true,
         label: "Bitcoin",
         data: coinData.map((value) => value.y),
-        // borderColor: "#00FF5F",
-        borderColor: `${({ themeChange }) => themeChange.text}`,
+        borderColor: theme.chartBorderColor,
         // gradient background
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
           const gradient = ctx.createLinearGradient(0, 0, 0, 680);
-          gradient.addColorStop(0, "rgba(0, 255, 95, .5)");
-          gradient.addColorStop(1, "rgba(0, 0, 0, 0.0)");
+          gradient.addColorStop(0, theme.chartsGradient.end);
+          gradient.addColorStop(1, theme.chartsGradient.start);
           return gradient;
         },
         pointRadius: 0,

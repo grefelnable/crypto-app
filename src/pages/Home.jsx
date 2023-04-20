@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import BitcoinChart from "../components/AreaChartBtc";
+import moment from "moment";
 
 const url =
-  "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=daily";
+  "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=current";
 const Home = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [coinData, setCoinData] = useState([{}]);
+  const [lastUpdate, setLastUpdate] = useState(0);
   // Fetch data for charts
   useEffect(() => {
     const fetchBitcoinData = async () => {
@@ -16,8 +18,11 @@ const Home = () => {
         x: value[0],
         y: value[1].toFixed(2),
       }));
+      setLastUpdate(moment(items[180].x).format("MMM DD YYYY"));
       setIsLoaded(true);
       setCoinData(items);
+
+      console.log(lastUpdate);
     };
     fetchBitcoinData().catch(console.error);
   }, []);
@@ -25,7 +30,11 @@ const Home = () => {
   return (
     <Container>
       <h2>Your Overview</h2>
-      <BitcoinChart coinData={coinData} isLoaded={isLoaded} />
+      <BitcoinChart
+        coinData={coinData}
+        isLoaded={isLoaded}
+        lastUpdate={lastUpdate}
+      />
     </Container>
   );
 };

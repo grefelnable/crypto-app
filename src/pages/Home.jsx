@@ -3,6 +3,7 @@ import styled from "styled-components";
 import BitcoinChart from "../components/AreaChartBtc";
 import moment from "moment";
 import BarChartBtc from "../components/BarChartBtc";
+import { formatCompactNumber } from "../utils/FormatNumber";
 
 const url =
   "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=current";
@@ -10,20 +11,30 @@ const Home = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [coinData, setCoinData] = useState([{}]);
   const [lastUpdate, setLastUpdate] = useState(0);
-  const [btcCurrentPrice, setBtcCurrentPrice] = useState("");
+  const [btcCurrentPrice, setBtcCurrentPrice] = useState(0);
+  const [coinVolume, setCoinVolume] = useState([{}]);
+  const [btcCurrentVolume, setBtcCurrentVolume] = useState(0);
   // Fetch data for charts
   useEffect(() => {
     const fetchBitcoinData = async () => {
       const response = await fetch(url);
       const data = await response.json();
-      const items = data.prices.map((value) => ({
+      const itemsPrices = data.prices.map((value) => ({
         x: value[0],
         y: value[1].toFixed(2),
       }));
-      setLastUpdate(moment(items[180].x).format("MMM DD YYYY"));
+      const itemsVolume = data.total_volumes.map((value) => ({
+        x: value[0],
+        y: value[1].toFixed(2),
+      }));
+      // console log
+      console.log(formatCompactNumber(itemsVolume[180].y));
       setIsLoaded(true);
-      setCoinData(items);
-      setBtcCurrentPrice(Number(items[180].y).toLocaleString("en-US"));
+      setLastUpdate(moment(itemsPrices[180].x).format("MMM DD YYYY"));
+      setCoinData(itemsPrices);
+      setCoinVolume(itemsVolume);
+      setBtcCurrentPrice(Number(itemsPrices[180].y).toLocaleString("en-US"));
+      setBtcCurrentVolume(formatCompactNumber(itemsVolume[180].y));
     };
     fetchBitcoinData().catch(console.error);
   }, []);
@@ -38,7 +49,11 @@ const Home = () => {
           lastUpdate={lastUpdate}
           btcCurrentPrice={btcCurrentPrice}
         />
-        <BarChartBtc />
+        <BarChartBtc
+          coinVolume={coinVolume}
+          isLoaded={isLoaded}
+          btcCurrentVolume={btcCurrentVolume}
+        />
       </ChartWrapper>
     </Container>
   );

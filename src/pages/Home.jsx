@@ -26,8 +26,7 @@ const Home = () => {
     };
     fetchBitcoinData().catch(console.error);
   }, []);
-  // console log
-  console.log(btcCurrentPrice);
+
   return (
     <Container>
       <h2>Your Overview</h2>

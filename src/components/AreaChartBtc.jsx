@@ -84,7 +84,7 @@ const ChartsOverview = ({
       <ChartInformation>
         <h2>Bitcoin</h2>
         <BtcPrice>$ {btcCurrentPrice}</BtcPrice>
-        <span>{lastUpdate}</span>
+        <LastUpdate>{lastUpdate}</LastUpdate>
       </ChartInformation>
       {!isLoaded ? (
         <div className="loading"></div>
@@ -102,7 +102,7 @@ const Container = styled.article`
 `;
 const ChartInformation = styled.div`
   padding: 1em;
-  margin-bottom: -1em;
+  margin-bottom: -2em;
   h2 {
     font-size: 1.375rem;
     margin-bottom: 0;
@@ -114,4 +114,8 @@ const ChartInformation = styled.div`
 
 const BtcPrice = styled.span`
   font-size: 2.75rem;
+`;
+
+const LastUpdate = styled.span`
+  font-size: 1.375rem;
 `;

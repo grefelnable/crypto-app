@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import BitcoinChart from "../components/AreaChartBtc";
+import BitcoinChart from "../components/Charts/AreaChartBtc";
 import moment from "moment";
-import BarChartBtc from "../components/BarChartBtc";
+import BarChartBtc from "../components/Charts/BarChartBtc";
 import { formatCompactNumber } from "../utils/FormatNumber";
 
 const url =

@@ -34,7 +34,7 @@ const MarketData = () => {
 
   return (
     <Container>
-      <li>Coins: {coins}</li>
+      <li>Coins: {coins.toLocaleString("en-US")}</li>
       <li>Exchange: {exchange}</li>
       <li>•${formatCompactNumber(totalMarketCap)}</li>
       <li>•${formatCompactNumber(totalVolume)}</li>

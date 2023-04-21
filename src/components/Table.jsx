@@ -33,46 +33,58 @@ const Table = () => {
   //   return <div className="loading"></div>;
   // }
   return (
-    <CoinTable>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Price</th>
-          <th>1h%</th>
-          <th>24h%</th>
-          <th>7d%</th>
-          <th>24h Volume/Market Cap</th>
-          <th>Circulating/Total Supply</th>
-          <th>Last 7d</th>
-        </tr>
-      </thead>
-      {coinItems.map((item) => (
-        <tbody key={item.id}>
+    <Container>
+      <CoinTable>
+        <thead>
           <tr>
-            <td>
-              <img src={item.image} alt="" />
-            </td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
+            <th>Name</th>
+            <th>Price</th>
+            <th>1h%</th>
+            <th>24h%</th>
+            <th>7d%</th>
+            <th>24h Volume/Market Cap</th>
+            <th>Circulating/Total Supply</th>
+            <th>Last 7d</th>
           </tr>
-        </tbody>
-      ))}
-    </CoinTable>
+        </thead>
+        {coinItems.map((item) => (
+          <tbody key={item.id}>
+            <tr>
+              <td>
+                <img src={item.image} alt={item.name} />
+              </td>
+            </tr>
+          </tbody>
+        ))}
+      </CoinTable>
+    </Container>
   );
 };
 export default Table;
 
 // CSS
-const CoinTable = styled.table`
+const Container = styled.div`
+  padding: 2em 1em;
   background: ${({ theme }) => theme.background};
-  width: 100%;
-  border-collapse: collapse;
+  border-radius: var(--borderRadius);
+  img {
+    width: 33.5px;
+  }
+
   /* loading color */
   .loading {
     border-top: 3px solid ${({ theme }) => theme.text};
   }
+`;
 
-  tr {
+const CoinTable = styled.table`
+  font-size: 12px;
+  font-weight: 300;
+  background: ${({ theme }) => theme.background};
+  width: 100%;
+  border-collapse: collapse;
+
+  tbody tr {
     border-bottom: 1px solid var(--grey-700);
   }
 `;

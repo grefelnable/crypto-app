@@ -4,6 +4,7 @@ import BitcoinChart from "../components/Charts/AreaChartBtc";
 import moment from "moment";
 import BarChartBtc from "../components/Charts/BarChartBtc";
 import { formatCompactNumber } from "../utils/FormatNumber";
+import Table from "../components/Table";
 
 const url =
   "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=current";
@@ -28,8 +29,7 @@ const Home = () => {
         x: value[0],
         y: value[1].toFixed(2),
       }));
-      // console log
-      console.log(volumeLastUpdate);
+
       setIsLoaded(true);
       setLastUpdate(moment(itemsPrices[180].x).format("MMM DD YYYY"));
       setCoinData(itemsPrices);
@@ -58,6 +58,8 @@ const Home = () => {
           volumeLastUpdate={volumeLastUpdate}
         />
       </ChartWrapper>
+      <h2>Your Overview</h2>
+      <Table />
     </Container>
   );
 };
@@ -72,4 +74,5 @@ const Container = styled.main`
 const ChartWrapper = styled.div`
   display: flex;
   gap: 2.875em;
+  margin-bottom: 1em;
 `;

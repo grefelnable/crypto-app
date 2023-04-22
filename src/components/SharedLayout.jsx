@@ -17,7 +17,7 @@ const SharedLayout = () => {
 export default SharedLayout;
 
 const SectionCenter = styled.div`
-  width: 90vw;
+  width: 95vw;
   margin: 0 auto;
   max-width: 1170px;
 `;

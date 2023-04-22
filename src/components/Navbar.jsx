@@ -48,6 +48,7 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   height: 65px;
+  width: 100%;
   background-color: ${({ theme }) => theme.navbarBackground};
 `;
 

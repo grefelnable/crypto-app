@@ -13,7 +13,7 @@ const Table = () => {
   useEffect(() => {
     setCoinItems(faker);
   }, []);
-  console.log(coinItems);
+  // console.log(coinItems);
   // // fetch coins information
   // useEffect(() => {
   //   const fetchCoinsInformation = async () => {
@@ -37,6 +37,7 @@ const Table = () => {
       <CoinTable>
         <thead>
           <tr>
+            <th scope="col">#</th>
             <th>Name</th>
             <th>Price</th>
             <th>1h%</th>
@@ -47,12 +48,13 @@ const Table = () => {
             <th>Last 7d</th>
           </tr>
         </thead>
-        {coinItems.map((item) => {
+        {coinItems.map((item, index) => {
           // destructure coinItems
           const { id, symbol, name, image } = item;
           return (
             <tbody key={id}>
               <tr>
+                <td scope="col">{index + 1}</td>
                 <td>
                   <img src={image} alt={`thumbnail of ${name}`} />
                 </td>
@@ -87,6 +89,10 @@ const CoinTable = styled.table`
   background: ${({ theme }) => theme.background};
   width: 100%;
   border-collapse: collapse;
+  /* align tbody with thead */
+  th {
+    text-align: left;
+  }
 
   tbody tr {
     border-bottom: 1px solid ${({ theme }) => theme.backgroundVariant};

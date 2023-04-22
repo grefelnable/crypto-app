@@ -85,6 +85,6 @@ const CoinTable = styled.table`
   border-collapse: collapse;
 
   tbody tr {
-    border-bottom: 1px solid var(--grey-700);
+    border-bottom: 1px solid ${({ theme }) => theme.backgroundVariant};
   }
 `;

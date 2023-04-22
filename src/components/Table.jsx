@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import { ReactComponent as Arrow } from "../assets/arrow-icon.svg";
+// to be deleted
 import faker from "./faker";
 
 // url
@@ -37,7 +39,7 @@ const Table = () => {
       <CoinTable>
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th>#</th>
             <th>Name</th>
             <th>Price</th>
             <th>1h%</th>
@@ -50,14 +52,39 @@ const Table = () => {
         </thead>
         {coinItems.map((item, index) => {
           // destructure coinItems
-          const { id, symbol, name, image } = item;
+          const {
+            id,
+            symbol,
+            name,
+            image,
+            current_price,
+            price_change_percentage_1h_in_currency: hourlyChange,
+          } = item;
+
+          // console log
+          console.log();
           return (
             <tbody key={id}>
               <tr>
-                <td scope="col">{index + 1}</td>
+                <td>{index + 1}</td>
                 <td>
-                  <img src={image} alt={`thumbnail of ${name}`} />
+                  <NameContainer>
+                    <img src={image} alt={`Thumbnail of ${name}`} />
+                    <p>
+                      {name} <span>({symbol})</span>
+                    </p>
+                  </NameContainer>
                 </td>
+                <td>
+                  $
+                  {current_price === 1
+                    ? `${current_price}.00`
+                    : current_price.toLocaleString()}
+                </td>
+                <PriceChange price={hourlyChange}>
+                  <ArrowIcon price={hourlyChange} />
+                  {Math.abs(hourlyChange.toFixed(2))}%
+                </PriceChange>
               </tr>
             </tbody>
           );
@@ -74,7 +101,8 @@ const Container = styled.div`
   background: ${({ theme }) => theme.background};
   border-radius: var(--borderRadius);
   img {
-    width: 33.5px;
+    width: 26px;
+    height: 26px;
   }
 
   /* loading color */
@@ -84,8 +112,8 @@ const Container = styled.div`
 `;
 
 const CoinTable = styled.table`
-  font-size: 12px;
-  font-weight: 300;
+  font-size: 0.875rem;
+  font-weight: 400;
   background: ${({ theme }) => theme.background};
   width: 100%;
   border-collapse: collapse;
@@ -97,4 +125,30 @@ const CoinTable = styled.table`
   tbody tr {
     border-bottom: 1px solid ${({ theme }) => theme.backgroundVariant};
   }
+`;
+
+const NameContainer = styled.div`
+  display: flex;
+  gap: 0.75em;
+  align-items: center;
+
+  p {
+    margin-bottom: 0.75em;
+  }
+
+  span {
+    text-transform: uppercase;
+  }
+`;
+
+const PriceChange = styled.td`
+  color: ${(props) => (props.price > 0 ? "#00FC2A" : "#FE1040")};
+`;
+
+const ArrowIcon = styled(Arrow)`
+  stroke: ${(props) => (props.price > 0 ? "#00FC2A" : "#FE1040")};
+  fill: ${(props) => (props.price > 0 ? "#00FC2A" : "#FE1040")};
+  margin-bottom: 0.1875em;
+  margin-right: 0.25em;
+  transform: ${(props) => (props.price > 0 ? "none" : "rotate(180deg)")}; ;
 `;

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ProgressBar from "./progress-bar.component";
 import btcImage from "../assets/bitcoin.png";
 import ethImage from "../assets/eth.png";
+import { ReactComponent as DotIcon } from "../assets/dot-icon.svg";
 
 const MarketData = () => {
   const [totalMarketCap, setTotalMarketCap] = useState(0);
@@ -36,14 +37,18 @@ const MarketData = () => {
     <Container>
       <li>Coins: {coins.toLocaleString("en-US")}</li>
       <li>Exchange: {exchange}</li>
-      <li>•${formatCompactNumber(totalMarketCap)}</li>
-      <li>•${formatCompactNumber(totalVolume)}</li>
       <li>
-        <img src={btcImage} alt="btc image" /> {btcMarketCapPercentage}%{" "}
+        <DotIconStyled />${formatCompactNumber(totalMarketCap)}
+      </li>
+      <li>
+        <DotIconStyled />${formatCompactNumber(totalVolume)}
+      </li>
+      <li>
+        <img src={btcImage} alt="btc image" /> {btcMarketCapPercentage}%
         <ProgressBar percentage={btcMarketCapPercentage} />
       </li>
       <li>
-        <img src={ethImage} alt="eth image" /> {ethMarketCapPercentage}%{" "}
+        <img src={ethImage} alt="eth image" /> {ethMarketCapPercentage}%
         <ProgressBar percentage={ethMarketCapPercentage} />
       </li>
     </Container>
@@ -66,4 +71,8 @@ const Container = styled.ul`
     align-items: center;
     gap: 0.25em;
   }
+`;
+
+const DotIconStyled = styled(DotIcon)`
+  fill: #fff;
 `;

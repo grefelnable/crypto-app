@@ -103,6 +103,7 @@ const ChartInformation = styled.div`
   margin-bottom: -2em;
   h2 {
     font-size: 1.375rem;
+    font-weight: 300;
     margin-bottom: 0;
   }
   span {
@@ -112,8 +113,10 @@ const ChartInformation = styled.div`
 
 const BtcVolume = styled.span`
   font-size: 2.75rem;
+  margin-bottom: -20px;
 `;
 
 const LastUpdate = styled.span`
   font-size: 1.375rem;
+  font-weight: 300;
 `;

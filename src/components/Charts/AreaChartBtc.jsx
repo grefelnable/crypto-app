@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import moment from "moment";
 import {
@@ -124,6 +123,7 @@ const ChartInformation = styled.div`
 const BtcPrice = styled.span`
   font-size: 2.75rem;
   font-weight: 400;
+  margin-bottom: -20px;
 `;
 
 const LastUpdate = styled.span`

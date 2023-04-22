@@ -59,6 +59,8 @@ const Table = () => {
             image,
             current_price,
             price_change_percentage_1h_in_currency: hourlyChange,
+            price_change_percentage_24h_in_currency: dailyChange,
+            price_change_percentage_7d_in_currency: weeklyChange,
           } = item;
 
           // console log
@@ -84,6 +86,14 @@ const Table = () => {
                 <PriceChange price={hourlyChange}>
                   <ArrowIcon price={hourlyChange} />
                   {Math.abs(hourlyChange.toFixed(2))}%
+                </PriceChange>
+                <PriceChange price={dailyChange}>
+                  <ArrowIcon price={dailyChange} />
+                  {Math.abs(dailyChange.toFixed(2))}%
+                </PriceChange>
+                <PriceChange price={weeklyChange}>
+                  <ArrowIcon price={weeklyChange} />
+                  {Math.abs(weeklyChange.toFixed(2))}%
                 </PriceChange>
               </tr>
             </tbody>

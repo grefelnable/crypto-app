@@ -47,15 +47,19 @@ const Table = () => {
             <th>Last 7d</th>
           </tr>
         </thead>
-        {coinItems.map((item) => (
-          <tbody key={item.id}>
-            <tr>
-              <td>
-                <img src={item.image} alt={item.name} />
-              </td>
-            </tr>
-          </tbody>
-        ))}
+        {coinItems.map((item) => {
+          // destructure coinItems
+          const { id, symbol, name, image } = item;
+          return (
+            <tbody key={id}>
+              <tr>
+                <td>
+                  <img src={image} alt={`thumbnail of ${name}`} />
+                </td>
+              </tr>
+            </tbody>
+          );
+        })}
       </CoinTable>
     </Container>
   );

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { ReactComponent as Arrow } from "../assets/arrow-icon.svg";
+import { formatCompactNumber } from "../utils/FormatNumber";
+import { ReactComponent as DotIcon } from "../assets/dot-icon.svg";
 // to be deleted
 import faker from "./faker";
 
@@ -58,6 +60,9 @@ const Table = () => {
             name,
             image,
             current_price,
+            total_volume,
+            market_cap,
+            // shorten name
             price_change_percentage_1h_in_currency: hourlyChange,
             price_change_percentage_24h_in_currency: dailyChange,
             price_change_percentage_7d_in_currency: weeklyChange,
@@ -95,6 +100,12 @@ const Table = () => {
                   <ArrowIcon price={weeklyChange} />
                   {Math.abs(weeklyChange.toFixed(2))}%
                 </PriceChange>
+                <td>
+                  <DotIcon />
+                  {formatCompactNumber(total_volume)}
+                  <DotIcon />
+                  {formatCompactNumber(market_cap)}
+                </td>
               </tr>
             </tbody>
           );

@@ -53,10 +53,6 @@ body {
   color: var(--textColor);
 }
 
-p {
-  margin-bottom: 1.25rem;
-}
-
 h1,
 h2,
 h3,

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { ReactComponent as Arrow } from "../assets/arrow-icon.svg";
 import { formatCompactNumber } from "../utils/FormatNumber";
 import { ReactComponent as DotIcon } from "../assets/dot-icon.svg";
+import { percentageColors } from "../data/percentageColors";
 // to be deleted
 import faker from "./faker";
 
@@ -17,6 +18,7 @@ const Table = () => {
   useEffect(() => {
     setCoinItems(faker);
   }, []);
+
   // console.log(coinItems);
   // // fetch coins information
   // useEffect(() => {
@@ -36,6 +38,7 @@ const Table = () => {
   // if (!isLoaded) {
   //   return <div className="loading"></div>;
   // }
+  //  TEST
   return (
     <Container>
       <CoinTable>
@@ -53,8 +56,10 @@ const Table = () => {
           </tr>
         </thead>
         {coinItems.map((item, index) => {
-          const colors = [{ ffb528 }, { green }, { red }];
-          console.log(colors);
+          // Different Colors for percentage bar
+          const firstColor =
+            percentageColors.colorA[index % percentageColors.colorA.length];
+          console.log(firstColor);
           // destructure coinItems
           const {
             id,
@@ -69,7 +74,6 @@ const Table = () => {
             price_change_percentage_24h_in_currency: dailyChange,
             price_change_percentage_7d_in_currency: weeklyChange,
           } = item;
-
           return (
             <tbody key={id}>
               <tr>

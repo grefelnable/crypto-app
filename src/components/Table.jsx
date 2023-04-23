@@ -53,6 +53,8 @@ const Table = () => {
           </tr>
         </thead>
         {coinItems.map((item, index) => {
+          const colors = [{ ffb528 }, { green }, { red }];
+          console.log(colors);
           // destructure coinItems
           const {
             id,
@@ -68,8 +70,6 @@ const Table = () => {
             price_change_percentage_7d_in_currency: weeklyChange,
           } = item;
 
-          // console log
-          console.log();
           return (
             <tbody key={id}>
               <tr>
@@ -101,10 +101,17 @@ const Table = () => {
                   {Math.abs(weeklyChange.toFixed(2))}%
                 </PriceChange>
                 <td>
-                  <DotIcon />
-                  {formatCompactNumber(total_volume)}
-                  <DotIcon />
-                  {formatCompactNumber(market_cap)}
+                  <FlexContainer>
+                    <FirstData>
+                      <DotIcon /> ${formatCompactNumber(total_volume)}
+                    </FirstData>
+                    <SecondData>
+                      <DotIcon /> ${formatCompactNumber(market_cap)}
+                    </SecondData>
+                  </FlexContainer>
+                  <PercentageBar>
+                    <Bar percent={(total_volume / market_cap) * 100}></Bar>
+                  </PercentageBar>
                 </td>
               </tr>
             </tbody>
@@ -167,9 +174,40 @@ const PriceChange = styled.td`
 `;
 
 const ArrowIcon = styled(Arrow)`
+  /* Change color when market data changes */
   stroke: ${(props) => (props.price > 0 ? "#00FC2A" : "#FE1040")};
   fill: ${(props) => (props.price > 0 ? "#00FC2A" : "#FE1040")};
   margin-bottom: 0.1875em;
   margin-right: 0.25em;
-  transform: ${(props) => (props.price > 0 ? "none" : "rotate(180deg)")}; ;
+  transform: ${(props) => (props.price > 0 ? "none" : "rotate(180deg)")};
+`;
+
+// align items using flexbox
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+// container for coin data: total volume, ciculating supply and etc...
+const FirstData = styled.p`
+  color: #ffb528;
+  fill: #ffb528;
+`;
+const SecondData = styled.p`
+  color: #fee158;
+  fill: #fee158;
+`;
+//  container for coin data end
+
+const PercentageBar = styled.div`
+  width: 100%;
+  height: 8px;
+  background: #fee158;
+  border-radius: var(--borderRadius);
+`;
+
+const Bar = styled.div`
+  width: ${(props) => props.percent}%;
+  height: inherit;
+  background: #ffb528;
+  border-radius: var(--borderRadius);
 `;

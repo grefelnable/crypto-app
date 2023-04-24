@@ -145,7 +145,10 @@ const Table = () => {
                   </PercentageBar>
                 </PercentageData>
                 <td>
-                  <SparklineChart sparklineData={sparkline_in_7d} />
+                  <SparklineChart
+                    sparklineData={sparkline_in_7d}
+                    weeklyChange={weeklyChange}
+                  />
                 </td>
               </tr>
             </tbody>

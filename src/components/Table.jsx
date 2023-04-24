@@ -58,8 +58,10 @@ const Table = () => {
         {coinItems.map((item, index) => {
           // Different Colors for percentage bar
           const firstColor =
+            // Access color by its index on the percentageColor array of objects
             percentageColors.colorA[index % percentageColors.colorA.length];
-          console.log(firstColor);
+          const secondColor =
+            percentageColors.colorB[index % percentageColors.colorB.length];
           // destructure coinItems
           const {
             id,
@@ -106,15 +108,18 @@ const Table = () => {
                 </PriceChange>
                 <td>
                   <FlexContainer>
-                    <FirstData>
+                    <FirstData color={firstColor}>
                       <DotIcon /> ${formatCompactNumber(total_volume)}
                     </FirstData>
-                    <SecondData>
+                    <SecondData color={secondColor}>
                       <DotIcon /> ${formatCompactNumber(market_cap)}
                     </SecondData>
                   </FlexContainer>
-                  <PercentageBar>
-                    <Bar percent={(total_volume / market_cap) * 100}></Bar>
+                  <PercentageBar color={secondColor}>
+                    <Bar
+                      percent={(total_volume / market_cap) * 100}
+                      color={firstColor}
+                    ></Bar>
                   </PercentageBar>
                 </td>
               </tr>
@@ -164,10 +169,6 @@ const NameContainer = styled.div`
   gap: 0.75em;
   align-items: center;
 
-  p {
-    margin-bottom: 0.75em;
-  }
-
   span {
     text-transform: uppercase;
   }
@@ -193,25 +194,27 @@ const FlexContainer = styled.div`
 `;
 // container for coin data: total volume, ciculating supply and etc...
 const FirstData = styled.p`
-  color: #ffb528;
-  fill: #ffb528;
+  color: ${(props) => props.color};
+  fill: ${(props) => props.color};
 `;
 const SecondData = styled.p`
-  color: #fee158;
-  fill: #fee158;
+  color: ${(props) => props.color};
+  fill: ${(props) => props.color};
 `;
 //  container for coin data end
 
 const PercentageBar = styled.div`
   width: 100%;
   height: 8px;
-  background: #fee158;
+  background: ${(props) => props.color};
   border-radius: var(--borderRadius);
+  /* Add space at the bottom before the border */
+  margin-bottom: 1.25em;
 `;
 
 const Bar = styled.div`
   width: ${(props) => props.percent}%;
   height: inherit;
-  background: #ffb528;
+  background: ${(props) => props.color};
   border-radius: var(--borderRadius);
 `;

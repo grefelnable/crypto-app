@@ -4,8 +4,6 @@ import { ReactComponent as Arrow } from "../assets/arrow-icon.svg";
 import { formatCompactNumber } from "../utils/FormatNumber";
 import { ReactComponent as DotIcon } from "../assets/dot-icon.svg";
 import { percentageColors } from "../data/percentageColors";
-// to be deleted
-import faker from "./faker";
 import SparklineChart from "./Charts/SparklineChart";
 
 // url
@@ -30,7 +28,7 @@ const Table = () => {
   }, []);
 
   if (!isLoaded) {
-    return <div className="loading"></div>;
+    return <div className="loader"></div>;
   }
   return (
     <Container>
@@ -160,11 +158,6 @@ const Container = styled.div`
   img {
     width: 26px;
     height: 26px;
-  }
-
-  /* loading color */
-  .loading {
-    border-top: 3px solid ${({ theme }) => theme.text};
   }
 `;
 

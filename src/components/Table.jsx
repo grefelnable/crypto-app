@@ -6,6 +6,7 @@ import { ReactComponent as DotIcon } from "../assets/dot-icon.svg";
 import { percentageColors } from "../data/percentageColors";
 // to be deleted
 import faker from "./faker";
+import SparklineChart from "./Charts/SparklineChart";
 
 // url
 const url =
@@ -73,6 +74,7 @@ const Table = () => {
             market_cap,
             circulating_supply,
             total_supply,
+            sparkline_in_7d,
             // shorten name
             price_change_percentage_1h_in_currency: hourlyChange,
             price_change_percentage_24h_in_currency: dailyChange,
@@ -142,6 +144,9 @@ const Table = () => {
                     ></Bar>
                   </PercentageBar>
                 </PercentageData>
+                <td>
+                  <SparklineChart sparklineData={sparkline_in_7d} />
+                </td>
               </tr>
             </tbody>
           );

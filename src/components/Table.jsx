@@ -15,31 +15,23 @@ const Table = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [coinItems, setCoinItems] = useState([]);
 
-  // Temporary data for development only
+  // fetch coins information
   useEffect(() => {
-    setCoinItems(faker);
+    const fetchCoinsInformation = async () => {
+      const response = await fetch(url);
+      const data = await response.json();
+      setIsLoaded(true);
+      setCoinItems(data);
+      // console log
+      console.log(data.map((item) => item.id));
+    };
+
+    fetchCoinsInformation().catch(console.error);
   }, []);
 
-  // console.log(coinItems);
-  // // fetch coins information
-  // useEffect(() => {
-  //   const fetchCoinsInformation = async () => {
-  //     const response = await fetch(url);
-  //     const data = await response.json();
-  //     setIsLoaded(true);
-  //     setCoinImage(data);
-  //     // console log
-  //     console.log(data.map((item) => item.id));
-  //     console.log(coinImage);
-  //   };
-
-  //   fetchCoinsInformation().catch(console.error);
-  // }, []);
-
-  // if (!isLoaded) {
-  //   return <div className="loading"></div>;
-  // }
-  //  TEST
+  if (!isLoaded) {
+    return <div className="loading"></div>;
+  }
   return (
     <Container>
       <CoinTable>

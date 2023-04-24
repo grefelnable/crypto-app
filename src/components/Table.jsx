@@ -109,7 +109,7 @@ const Table = () => {
                   {Math.abs(weeklyChange.toFixed(2))}%
                 </PriceChange>
                 {/* 24h Volume / Market Cap */}
-                <td>
+                <PercentageData>
                   <FlexContainer>
                     <FirstData color={firstColor}>
                       <DotIcon /> ${formatCompactNumber(total_volume)}
@@ -124,9 +124,9 @@ const Table = () => {
                       color={firstColor}
                     ></Bar>
                   </PercentageBar>
-                </td>
+                </PercentageData>
                 {/* Circulating / Total Supply */}
-                <td>
+                <PercentageData>
                   <FlexContainer>
                     <FirstData color={firstColor}>
                       <DotIcon /> ${formatCompactNumber(circulating_supply)}
@@ -141,7 +141,7 @@ const Table = () => {
                       color={firstColor}
                     ></Bar>
                   </PercentageBar>
-                </td>
+                </PercentageData>
               </tr>
             </tbody>
           );
@@ -208,6 +208,11 @@ const ArrowIcon = styled(Arrow)`
   margin-bottom: 0.1875em;
   margin-right: 0.25em;
   transform: ${(props) => (props.price > 0 ? "none" : "rotate(180deg)")};
+`;
+
+const PercentageData = styled.td`
+  width: 180px;
+  padding-right: 1em;
 `;
 
 // align items using flexbox

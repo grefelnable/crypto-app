@@ -71,6 +71,8 @@ const Table = () => {
             current_price,
             total_volume,
             market_cap,
+            circulating_supply,
+            total_supply,
             // shorten name
             price_change_percentage_1h_in_currency: hourlyChange,
             price_change_percentage_24h_in_currency: dailyChange,
@@ -80,14 +82,14 @@ const Table = () => {
             <tbody key={id}>
               <tr>
                 <td>{index + 1}</td>
-                <td>
+                <CoinName>
                   <NameContainer>
                     <img src={image} alt={`Thumbnail of ${name}`} />
                     <p>
                       {name} <span>({symbol})</span>
                     </p>
                   </NameContainer>
-                </td>
+                </CoinName>
                 <td>
                   $
                   {current_price === 1
@@ -106,6 +108,7 @@ const Table = () => {
                   <ArrowIcon price={weeklyChange} />
                   {Math.abs(weeklyChange.toFixed(2))}%
                 </PriceChange>
+                {/* 24h Volume / Market Cap */}
                 <td>
                   <FlexContainer>
                     <FirstData color={firstColor}>
@@ -118,6 +121,23 @@ const Table = () => {
                   <PercentageBar color={secondColor}>
                     <Bar
                       percent={(total_volume / market_cap) * 100}
+                      color={firstColor}
+                    ></Bar>
+                  </PercentageBar>
+                </td>
+                {/* Circulating / Total Supply */}
+                <td>
+                  <FlexContainer>
+                    <FirstData color={firstColor}>
+                      <DotIcon /> ${formatCompactNumber(circulating_supply)}
+                    </FirstData>
+                    <SecondData color={secondColor}>
+                      <DotIcon /> ${formatCompactNumber(total_supply)}
+                    </SecondData>
+                  </FlexContainer>
+                  <PercentageBar color={secondColor}>
+                    <Bar
+                      percent={(circulating_supply / total_supply) * 100}
                       color={firstColor}
                     ></Bar>
                   </PercentageBar>
@@ -164,11 +184,14 @@ const CoinTable = styled.table`
   }
 `;
 
+const CoinName = styled.td`
+  width: 250px;
+`;
+
 const NameContainer = styled.div`
   display: flex;
   gap: 0.75em;
   align-items: center;
-
   span {
     text-transform: uppercase;
   }

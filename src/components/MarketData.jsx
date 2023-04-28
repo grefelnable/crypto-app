@@ -35,12 +35,12 @@ const MarketData = () => {
 
   return (
     <Container>
-      <li>Coins: {coins.toLocaleString("en-US")}</li>
-      <li>Exchange: {exchange}</li>
-      <li>
+      <li className="display-none">Coins: {coins.toLocaleString("en-US")}</li>
+      <li className="display-none">Exchange: {exchange}</li>
+      <li className="display-flex">
         <DotIconStyled />${formatCompactNumber(totalMarketCap)}
       </li>
-      <li>
+      <li className="display-flex">
         <DotIconStyled />${formatCompactNumber(totalVolume)}
       </li>
       <li>
@@ -59,6 +59,7 @@ export default MarketData;
 const Container = styled.ul`
   width: fit-content;
   margin: 0 auto;
+  margin-bottom: 1.25em;
   background: ${({ theme }) => theme.navbarBackground};
   display: flex;
   align-items: center;
@@ -67,9 +68,18 @@ const Container = styled.ul`
   border-bottom-left-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
   li {
-    display: flex;
     align-items: center;
     gap: 0.25em;
+  }
+  /* display on all screen */
+  .display-flex {
+    display: flex;
+  }
+  /* hide on small screens */
+  @media (max-width: 768px) {
+    .display-none {
+      display: none;
+    }
   }
 `;
 

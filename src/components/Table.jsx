@@ -20,8 +20,6 @@ const Table = () => {
       const data = await response.json();
       setIsLoaded(true);
       setCoinItems(data);
-      // console log
-      console.log(data.map((item) => item.id));
     };
 
     fetchCoinsInformation().catch(console.error);

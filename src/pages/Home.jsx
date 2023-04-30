@@ -16,6 +16,7 @@ const Home = () => {
   const [coinVolume, setCoinVolume] = useState([{}]);
   const [btcCurrentVolume, setBtcCurrentVolume] = useState(0);
   const [volumeLastUpdate, setVolumeLastUpdate] = useState(0);
+
   // Fetch data for charts
   useEffect(() => {
     const fetchBitcoinData = async () => {

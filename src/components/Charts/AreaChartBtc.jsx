@@ -106,6 +106,10 @@ const Container = styled.article`
   .loading {
     border-top: 3px solid ${({ theme }) => theme.text};
   }
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 1em;
+  }
 `;
 const ChartInformation = styled.div`
   padding: 1em;

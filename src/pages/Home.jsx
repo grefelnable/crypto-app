@@ -72,7 +72,9 @@ const Container = styled.main`
 `;
 
 const ChartWrapper = styled.div`
-  display: flex;
-  gap: 2.875em;
   margin-bottom: 1em;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    gap: 2.875em;
+  }
 `;

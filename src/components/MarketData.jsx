@@ -75,12 +75,6 @@ const Container = styled.ul`
   .display-flex {
     display: flex;
   }
-  /* hide on small screens */
-  @media (max-width: 768px) {
-    .display-none {
-      display: none;
-    }
-  }
 `;
 
 const DotIconStyled = styled(DotIcon)`

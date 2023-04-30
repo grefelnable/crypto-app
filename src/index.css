@@ -124,3 +124,10 @@ ul {
     transform: rotate(360deg);
   }
 }
+
+/* hide on small screens */
+@media (max-width: 768px) {
+  .display-none {
+    display: none;
+  }
+}

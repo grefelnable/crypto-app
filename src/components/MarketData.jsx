@@ -43,11 +43,11 @@ const MarketData = () => {
       <li className="display-flex">
         <DotIconStyled />${formatCompactNumber(totalVolume)}
       </li>
-      <li>
-        <img src={btcImage} alt="btc image" /> {btcMarketCapPercentage}%
+      <li className=" display-flex">
+        <img src={btcImage} alt="btc image" /> <p>{btcMarketCapPercentage}% </p>
         <ProgressBar percentage={btcMarketCapPercentage} />
       </li>
-      <li>
+      <li className="display-flex">
         <img src={ethImage} alt="eth image" /> {ethMarketCapPercentage}%
         <ProgressBar percentage={ethMarketCapPercentage} />
       </li>
@@ -57,16 +57,23 @@ const MarketData = () => {
 export default MarketData;
 
 const Container = styled.ul`
-  width: fit-content;
+  width: 100%;
   margin: 0 auto;
   margin-bottom: 1.25em;
   background: ${({ theme }) => theme.navbarBackground};
   display: flex;
   align-items: center;
-  gap: 1em;
   padding: 0.5em 1em;
   border-bottom-left-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
+  gap: 0.75em;
+
+  /* gap and width on bigger screen */
+  @media screen and (min-width: 768px) {
+    gap: 1em;
+    width: fit-content;
+  }
+
   li {
     align-items: center;
     gap: 0.25em;

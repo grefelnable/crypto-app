@@ -3,13 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 // Get theme settings from local storage
 const getTheme = () => {
   const theme = `${window?.localStorage?.getItem("theme")}`;
-  if (["light", "dark"].includes(theme)) {
-    return theme;
-  }
+  if (["light", "dark"].includes(theme)) return theme;
+
   const userMedia = window.matchMedia("(prefers-color-scheme: light)");
-  if (userMedia.matches) {
-    return "light";
-  }
+  if (userMedia.matches) return "light";
 
   return "dark";
 };
@@ -20,7 +17,7 @@ export const themeSlice = createSlice({
   name: "theme",
   initialState,
   reducers: {
-    toggleTheme: (action) => action.payload,
+    toggleTheme: (state, action) => action.payload,
   },
 });
 

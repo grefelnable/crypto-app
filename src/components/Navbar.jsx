@@ -56,7 +56,7 @@ const SectionCenter = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 90vw;
+  width: 80vw;
   margin: 0 auto;
   max-width: 1170px;
 `;

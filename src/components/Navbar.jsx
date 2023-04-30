@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { useState } from "react";
-import DropDownContent from "./DropDownContent";
+import ModalMenu from "./ModalMenu";
 import Search from "./Search";
 import LinkBtns from "./LinkBtns";
 import ToggleThemeBtn from "./ToggleThemeBtn";
@@ -38,8 +38,8 @@ const Navbar = () => {
           </div>
         </HamburgerIconContainer>
 
-        {/* Sidebar Menu */}
-        <DropDownContent toggleMenu={toggleMenu} />
+        {/* Modal Menu */}
+        <ModalMenu toggleMenu={toggleMenu} />
       </SectionCenter>
     </Nav>
   );

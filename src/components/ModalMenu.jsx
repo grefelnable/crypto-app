@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 
-const DropDownContent = ({ toggleMenu }) => {
+const ModalMenu = ({ toggleMenu }) => {
   // Prevent body from scrolling when sidebar menu is open on small screen
   useEffect(() => {
     if (toggleMenu) {
@@ -32,7 +32,7 @@ const DropDownContent = ({ toggleMenu }) => {
     </Container>
   );
 };
-export default DropDownContent;
+export default ModalMenu;
 
 const Container = styled.div`
   text-align: center;

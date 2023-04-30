@@ -1,7 +1,16 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
 
 const DropDownContent = ({ toggleMenu }) => {
+  // Prevent body from scrolling when sidebar menu is open on small screen
+  useEffect(() => {
+    if (toggleMenu) {
+      document.body.style.overflow = "hidden";
+      return () => (document.body.style.overflow = "unset");
+    }
+  }, [toggleMenu]);
+
   return (
     <Container style={{ display: `${toggleMenu ? "" : "none"}` }}>
       <NavLink
@@ -26,14 +35,16 @@ const DropDownContent = ({ toggleMenu }) => {
 export default DropDownContent;
 
 const Container = styled.div`
+  text-align: center;
+  padding-top: 140px;
+  height: 100vh;
+  border: 1px solid magenta;
   background-color: var(--grey-800);
-  border-radius: 0.5em;
-  box-shadow: var(--shadow-4);
-  position: absolute;
-  padding: 1em 2em;
-  padding-left: 1em;
-  right: 1.5em;
-  top: 3.5em;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
   z-index: 10;
   animation: growOut 250ms ease-in-out forwards;
 

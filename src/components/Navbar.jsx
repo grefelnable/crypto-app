@@ -30,16 +30,13 @@ const Navbar = () => {
           <ToggleThemeBtn />
         </SearchMenuContainer>
         {/* HAMBURGER MENU and Theme Change on Small screen*/}
-        <div style={{ display: "flex", alignItems: "center", gap: "1em" }}>
-          <ToggleThemeBtn />
-          <HamburgerIconContainer onClick={handleMenuClick}>
-            <HamburgerIconCheckbox type="checkbox" />
-            <div>
-              <span></span>
-              <span></span>
-            </div>
-          </HamburgerIconContainer>
-        </div>
+        <HamburgerIconContainer onClick={handleMenuClick}>
+          <HamburgerIconCheckbox type="checkbox" />
+          <div>
+            <span></span>
+            <span></span>
+          </div>
+        </HamburgerIconContainer>
 
         {/* Sidebar Menu */}
         <DropDownContent toggleMenu={toggleMenu} />
@@ -63,7 +60,7 @@ const SectionCenter = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 80vw;
+  width: 90vw;
   margin: 0 auto;
   max-width: 1170px;
 `;
@@ -88,6 +85,7 @@ const SearchMenuContainer = styled.div`
 `;
 
 const HamburgerIconContainer = styled.div`
+  z-index: 20;
   margin-top: 2px;
   cursor: pointer;
   position: relative;
@@ -121,8 +119,7 @@ const HamburgerIconContainer = styled.div`
     }
   }
 
-  &.active,
-  .menu-icon__cheeckbox:checked + div {
+  &.active {
     span {
       &:first-of-type {
         transform: rotate(45deg);

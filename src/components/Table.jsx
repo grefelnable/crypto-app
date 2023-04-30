@@ -6,6 +6,9 @@ import { ReactComponent as DotIcon } from "../assets/dot-icon.svg";
 import { percentageColors } from "../data/percentageColors";
 import SparklineChart from "./Charts/SparklineChart";
 
+// for production only; delete after
+import faker from "../faker";
+
 // url
 const url =
   "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d";
@@ -13,17 +16,24 @@ const Table = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [coinItems, setCoinItems] = useState([]);
 
-  // fetch coins information
+  // for production only; delete after
   useEffect(() => {
-    const fetchCoinsInformation = async () => {
-      const response = await fetch(url);
-      const data = await response.json();
-      setIsLoaded(true);
-      setCoinItems(data);
-    };
-
-    fetchCoinsInformation().catch(console.error);
+    setIsLoaded(true);
+    setCoinItems(faker);
+    console.log(coinItems);
   }, []);
+
+  // fetch coins information
+  // useEffect(() => {
+  //   const fetchCoinsInformation = async () => {
+  //     const response = await fetch(url);
+  //     const data = await response.json();
+  //     setIsLoaded(true);
+  //     setCoinItems(data);
+  //   };
+
+  //   fetchCoinsInformation().catch(console.error);
+  // }, []);
 
   if (!isLoaded) {
     return <div className="loader"></div>;
@@ -33,7 +43,7 @@ const Table = () => {
       <CoinTable>
         <thead>
           <tr>
-            <th>#</th>
+            <th className="display-none">#</th>
             <th>Name</th>
             <th>Price</th>
             <th>1h%</th>
@@ -71,7 +81,7 @@ const Table = () => {
           return (
             <tbody key={id}>
               <tr>
-                <td>{index + 1}</td>
+                <td className="display-none">{index + 1}</td>
                 <CoinName>
                   <NameContainer>
                     <img src={image} alt={`Thumbnail of ${name}`} />
@@ -157,6 +167,10 @@ const Container = styled.div`
     width: 26px;
     height: 26px;
   }
+
+  overflow-x: scroll;
+  overflow-y: scroll;
+  position: relative;
 `;
 
 const CoinTable = styled.table`
@@ -173,6 +187,10 @@ const CoinTable = styled.table`
   tbody tr {
     border-bottom: 1px solid ${({ theme }) => theme.backgroundVariant};
   }
+
+  /* stick table head */
+  position: relative;
+  left: 2px;
 `;
 
 const CoinName = styled.td`
@@ -190,6 +208,7 @@ const NameContainer = styled.div`
 
 const PriceChange = styled.td`
   color: ${(props) => (props.price > 0 ? "#00FC2A" : "#FE1040")};
+  min-width: 70px;
 `;
 
 const ArrowIcon = styled(Arrow)`
@@ -224,6 +243,7 @@ const SecondData = styled.p`
 
 const PercentageBar = styled.div`
   width: 100%;
+  min-width: 200px;
   height: 8px;
   background: ${(props) => props.color};
   border-radius: var(--borderRadius);

@@ -5,6 +5,7 @@ import { formatCompactNumber } from "../utils/FormatNumber";
 import { ReactComponent as DotIcon } from "../assets/dot-icon.svg";
 import { percentageColors } from "../data/percentageColors";
 import SparklineChart from "./Charts/SparklineChart";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 // for production only; delete after
 import faker from "../faker";
@@ -40,119 +41,129 @@ const Table = () => {
   }
   return (
     <Container>
-      <CoinTable>
-        <thead>
-          <tr>
-            <th className="display-none">#</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>1h%</th>
-            <th>24h%</th>
-            <th>7d%</th>
-            <th>24h Volume/Market Cap</th>
-            <th>Circulating/Total Supply</th>
-            <th>Last 7d</th>
-          </tr>
-        </thead>
-        {coinItems.map((item, index) => {
-          // Different Colors for percentage bar
-          const firstColor =
-            // Access color by its index on the percentageColor array of objects
-            percentageColors.colorA[index % percentageColors.colorA.length];
-          const secondColor =
-            percentageColors.colorB[index % percentageColors.colorB.length];
-          // destructure coinItems
-          const {
-            id,
-            symbol,
-            name,
-            image,
-            current_price,
-            total_volume,
-            market_cap,
-            circulating_supply,
-            total_supply,
-            sparkline_in_7d,
-            // shorten name
-            price_change_percentage_1h_in_currency: hourlyChange,
-            price_change_percentage_24h_in_currency: dailyChange,
-            price_change_percentage_7d_in_currency: weeklyChange,
-          } = item;
-          return (
-            <tbody key={id}>
-              <tr>
-                <td className="display-none">{index + 1}</td>
-                <CoinName>
-                  <NameContainer>
-                    <img src={image} alt={`Thumbnail of ${name}`} />
-                    <p>
-                      {name} <span>({symbol})</span>
-                    </p>
-                  </NameContainer>
-                </CoinName>
-                <td>
-                  $
-                  {current_price === 1
-                    ? `${current_price}.00`
-                    : current_price.toLocaleString()}
-                </td>
-                <PriceChange price={hourlyChange}>
-                  <ArrowIcon price={hourlyChange} />
-                  {Math.abs(hourlyChange.toFixed(2))}%
-                </PriceChange>
-                <PriceChange price={dailyChange}>
-                  <ArrowIcon price={dailyChange} />
-                  {Math.abs(dailyChange.toFixed(2))}%
-                </PriceChange>
-                <PriceChange price={weeklyChange}>
-                  <ArrowIcon price={weeklyChange} />
-                  {Math.abs(weeklyChange.toFixed(2))}%
-                </PriceChange>
-                {/* 24h Volume / Market Cap */}
-                <PercentageData>
-                  <FlexContainer>
-                    <FirstData color={firstColor}>
-                      <DotIcon /> ${formatCompactNumber(total_volume)}
-                    </FirstData>
-                    <SecondData color={secondColor}>
-                      <DotIcon /> ${formatCompactNumber(market_cap)}
-                    </SecondData>
-                  </FlexContainer>
-                  <PercentageBar color={secondColor}>
-                    <Bar
-                      percent={(total_volume / market_cap) * 100}
-                      color={firstColor}
-                    ></Bar>
-                  </PercentageBar>
-                </PercentageData>
-                {/* Circulating / Total Supply */}
-                <PercentageData>
-                  <FlexContainer>
-                    <FirstData color={firstColor}>
-                      <DotIcon /> ${formatCompactNumber(circulating_supply)}
-                    </FirstData>
-                    <SecondData color={secondColor}>
-                      <DotIcon /> ${formatCompactNumber(total_supply)}
-                    </SecondData>
-                  </FlexContainer>
-                  <PercentageBar color={secondColor}>
-                    <Bar
-                      percent={(circulating_supply / total_supply) * 100}
-                      color={firstColor}
-                    ></Bar>
-                  </PercentageBar>
-                </PercentageData>
-                <td>
-                  <SparklineChart
-                    sparklineData={sparkline_in_7d}
-                    weeklyChange={weeklyChange}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </CoinTable>
+      <InfiniteScroll
+        dataLength={coinItems.length}
+        loader={<h4>Loading...</h4>}
+        endMessage={
+          <p style={{ textAlign: "center" }}>
+            <b>Yay! You have seen it all</b>
+          </p>
+        }
+      >
+        <CoinTable>
+          <thead>
+            <tr>
+              <th className="display-none">#</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>1h%</th>
+              <th>24h%</th>
+              <th>7d%</th>
+              <th>24h Volume/Market Cap</th>
+              <th>Circulating/Total Supply</th>
+              <th>Last 7d</th>
+            </tr>
+          </thead>
+          {coinItems.map((item, index) => {
+            // Different Colors for percentage bar
+            const firstColor =
+              // Access color by its index on the percentageColor array of objects
+              percentageColors.colorA[index % percentageColors.colorA.length];
+            const secondColor =
+              percentageColors.colorB[index % percentageColors.colorB.length];
+            // destructure coinItems
+            const {
+              id,
+              symbol,
+              name,
+              image,
+              current_price,
+              total_volume,
+              market_cap,
+              circulating_supply,
+              total_supply,
+              sparkline_in_7d,
+              // shorten name
+              price_change_percentage_1h_in_currency: hourlyChange,
+              price_change_percentage_24h_in_currency: dailyChange,
+              price_change_percentage_7d_in_currency: weeklyChange,
+            } = item;
+            return (
+              <tbody key={id}>
+                <tr>
+                  <td className="display-none">{index + 1}</td>
+                  <CoinName>
+                    <NameContainer>
+                      <img src={image} alt={`Thumbnail of ${name}`} />
+                      <p>
+                        {name} <span>({symbol})</span>
+                      </p>
+                    </NameContainer>
+                  </CoinName>
+                  <td>
+                    $
+                    {current_price === 1
+                      ? `${current_price}.00`
+                      : current_price.toLocaleString()}
+                  </td>
+                  <PriceChange price={hourlyChange}>
+                    <ArrowIcon price={hourlyChange} />
+                    {Math.abs(hourlyChange.toFixed(2))}%
+                  </PriceChange>
+                  <PriceChange price={dailyChange}>
+                    <ArrowIcon price={dailyChange} />
+                    {Math.abs(dailyChange.toFixed(2))}%
+                  </PriceChange>
+                  <PriceChange price={weeklyChange}>
+                    <ArrowIcon price={weeklyChange} />
+                    {Math.abs(weeklyChange.toFixed(2))}%
+                  </PriceChange>
+                  {/* 24h Volume / Market Cap */}
+                  <PercentageData>
+                    <FlexContainer>
+                      <FirstData color={firstColor}>
+                        <DotIcon /> ${formatCompactNumber(total_volume)}
+                      </FirstData>
+                      <SecondData color={secondColor}>
+                        <DotIcon /> ${formatCompactNumber(market_cap)}
+                      </SecondData>
+                    </FlexContainer>
+                    <PercentageBar color={secondColor}>
+                      <Bar
+                        percent={(total_volume / market_cap) * 100}
+                        color={firstColor}
+                      ></Bar>
+                    </PercentageBar>
+                  </PercentageData>
+                  {/* Circulating / Total Supply */}
+                  <PercentageData>
+                    <FlexContainer>
+                      <FirstData color={firstColor}>
+                        <DotIcon /> ${formatCompactNumber(circulating_supply)}
+                      </FirstData>
+                      <SecondData color={secondColor}>
+                        <DotIcon /> ${formatCompactNumber(total_supply)}
+                      </SecondData>
+                    </FlexContainer>
+                    <PercentageBar color={secondColor}>
+                      <Bar
+                        percent={(circulating_supply / total_supply) * 100}
+                        color={firstColor}
+                      ></Bar>
+                    </PercentageBar>
+                  </PercentageData>
+                  <td>
+                    <SparklineChart
+                      sparklineData={sparkline_in_7d}
+                      weeklyChange={weeklyChange}
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            );
+          })}
+        </CoinTable>
+      </InfiniteScroll>
     </Container>
   );
 };
@@ -167,10 +178,6 @@ const Container = styled.div`
     width: 26px;
     height: 26px;
   }
-
-  overflow-x: scroll;
-  overflow-y: scroll;
-  position: relative;
 `;
 
 const CoinTable = styled.table`

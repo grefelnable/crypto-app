@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import logo from "../assets/logo.png";
-import { ReactComponent as HamburgerIcon } from "../assets/hamburger-menu.svg";
 import { useState } from "react";
 import DropDownContent from "./DropDownContent";
 import Search from "./Search";
@@ -24,17 +23,25 @@ const Navbar = () => {
           {/* links to different page on bigger screen */}
           <LinkBtns />
         </LogoBtnsContainer>
-        <SearchMenuContainer>
+        <SearchMenuContainer className="display-none">
           {/* SEARCH BAR */}
           <Search />
           {/* TOGGLE THEME */}
           <ToggleThemeBtn />
-          {/* HAMBURGER MENU on Small screen*/}
-          <HamburgerIconContainer onClick={handleMenuClick}>
-            <HamburgerIcon />
-          </HamburgerIconContainer>
         </SearchMenuContainer>
-        {/* DROPDOWN CONTENT */}
+        {/* HAMBURGER MENU and Theme Change on Small screen*/}
+        <div style={{ display: "flex", alignItems: "center", gap: "1em" }}>
+          <ToggleThemeBtn />
+          <HamburgerIconContainer onClick={handleMenuClick}>
+            <HamburgerIconCheckbox type="checkbox" />
+            <div>
+              <span></span>
+              <span></span>
+            </div>
+          </HamburgerIconContainer>
+        </div>
+
+        {/* Sidebar Menu */}
         <DropDownContent toggleMenu={toggleMenu} />
       </SectionCenter>
     </Nav>
@@ -72,18 +79,89 @@ const LogoContainer = styled.div`
 `;
 
 const SearchMenuContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
   background-color: ${({ theme }) => theme.navbarBackground};
 `;
 
-const HamburgerIconContainer = styled.i`
-  margin-top: 6px;
+const HamburgerIconContainer = styled.div`
+  margin-top: 2px;
   cursor: pointer;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  transform: scale(1.25);
+  div {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 22px;
+    height: 12px;
+  }
+  span {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--grey-400);
+    border-radius: 1px;
+    transition: all 0.2s cubic-bezier(0.1, 0.82, 0.76, 0.965);
+
+    &:first-of-type {
+      top: 0;
+    }
+    &:last-of-type {
+      bottom: 0;
+    }
+  }
+
+  &.active,
+  .menu-icon__cheeckbox:checked + div {
+    span {
+      &:first-of-type {
+        transform: rotate(45deg);
+        top: 5px;
+      }
+      &:last-of-type {
+        transform: rotate(-45deg);
+        bottom: 5px;
+      }
+    }
+  }
 
   /* hide on big screen */
   @media (min-width: 768px) {
     display: none;
+  }
+`;
+
+const HamburgerIconCheckbox = styled.input`
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  z-index: 2;
+  -webkit-touch-callout: none;
+  position: absolute;
+  opacity: 0;
+
+  &:checked + div {
+    span {
+      &:first-of-type {
+        transform: rotate(45deg);
+        top: 5px;
+      }
+      &:last-of-type {
+        transform: rotate(-45deg);
+        bottom: 5px;
+      }
+    }
   }
 `;

@@ -40,7 +40,7 @@ const Container = styled.div`
   padding-top: 100px;
   padding-left: 2em;
   height: 100vh;
-  background-color: var(--grey-800);
+  background: ${({ theme }) => theme.body};
   position: fixed;
   top: 0;
   right: 0;
@@ -62,11 +62,12 @@ const Container = styled.div`
     }
   }
   a {
-    color: var(--grey-300);
+    color: ${({ theme }) => theme.text};
     display: block;
     transition: var(--transition);
     letter-spacing: var(--letterSpacing);
-    text-transform: uppercase;
+    font-weight: 500;
+    text-transform: capitalize;
   }
   a:hover {
     color: var(--primary-500);

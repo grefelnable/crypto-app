@@ -35,29 +35,42 @@ const MarketData = () => {
 
   return (
     <Container>
-      <li className="display-none">Coins: {coins.toLocaleString("en-US")}</li>
-      <li className="display-none">Exchange: {exchange}</li>
-      <li className="display-flex">
-        <DotIconStyled />${formatCompactNumber(totalMarketCap)}
-      </li>
-      <li className="display-flex">
-        <DotIconStyled />${formatCompactNumber(totalVolume)}
-      </li>
-      <li className=" display-flex">
-        <img src={btcImage} alt="btc image" /> <p>{btcMarketCapPercentage}% </p>
-        <ProgressBar percentage={btcMarketCapPercentage} />
-      </li>
-      <li className="display-flex">
-        <img src={ethImage} alt="eth image" /> {ethMarketCapPercentage}%
-        <ProgressBar percentage={ethMarketCapPercentage} />
-      </li>
+      <ListContainer>
+        <li className="display-none">Coins: {coins.toLocaleString("en-US")}</li>
+        <li className="display-none">Exchange: {exchange}</li>
+        <li className="display-flex">
+          <DotIconStyled />${formatCompactNumber(totalMarketCap)}
+        </li>
+        <li className="display-flex">
+          <DotIconStyled />${formatCompactNumber(totalVolume)}
+        </li>
+        <li className=" display-flex">
+          <img src={btcImage} alt="btc image" />{" "}
+          <p>{btcMarketCapPercentage}% </p>
+          <ProgressBar percentage={btcMarketCapPercentage} />
+        </li>
+        <li className="display-flex">
+          <img src={ethImage} alt="eth image" /> {ethMarketCapPercentage}%
+          <ProgressBar percentage={ethMarketCapPercentage} />
+        </li>
+      </ListContainer>
     </Container>
   );
 };
 export default MarketData;
 
-const Container = styled.ul`
+const Container = styled.div`
   width: 100%;
+
+  /* darken bg on small screen */
+  @media screen and (max-width: 768px) {
+    background: ${({ theme }) => theme.navbarBackground};
+  }
+`;
+
+const ListContainer = styled.ul`
+  width: 95vw;
+  overflow: hidden;
   margin: 0 auto;
   margin-bottom: 1.25em;
   background: ${({ theme }) => theme.navbarBackground};
@@ -75,6 +88,7 @@ const Container = styled.ul`
   }
 
   li {
+    justify-content: space-between;
     align-items: center;
     gap: 0.25em;
   }

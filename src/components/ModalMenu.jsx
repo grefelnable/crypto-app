@@ -35,10 +35,11 @@ const ModalMenu = ({ toggleMenu }) => {
 export default ModalMenu;
 
 const Container = styled.div`
-  text-align: center;
-  padding-top: 140px;
+  font-size: 1.75rem;
+  text-align: left;
+  padding-top: 100px;
+  padding-left: 2em;
   height: 100vh;
-  border: 1px solid magenta;
   background-color: var(--grey-800);
   position: fixed;
   top: 0;

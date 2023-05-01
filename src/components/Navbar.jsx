@@ -29,7 +29,7 @@ const Navbar = () => {
           {/* TOGGLE THEME */}
           <ToggleThemeBtn />
         </SearchMenuContainer>
-        {/* HAMBURGER MENU and Theme Change on Small screen*/}
+        {/* HAMBURGER MENU on Small screen*/}
         <HamburgerIconContainer onClick={handleMenuClick}>
           <HamburgerIconCheckbox type="checkbox" />
           <div>

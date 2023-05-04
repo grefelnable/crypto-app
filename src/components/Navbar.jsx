@@ -5,6 +5,7 @@ import ModalMenu from "./ModalMenu";
 import Search from "./Search";
 import LinkBtns from "./LinkBtns";
 import ToggleThemeBtn from "./ToggleThemeBtn";
+import SetCurrency from "./SetCurrency";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -26,6 +27,8 @@ const Navbar = () => {
         <SearchMenuContainer className="display-none">
           {/* SEARCH BAR */}
           <Search />
+          {/* Set Currency */}
+          <SetCurrency />
           {/* TOGGLE THEME */}
           <ToggleThemeBtn />
         </SearchMenuContainer>

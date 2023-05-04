@@ -2,10 +2,14 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCurrency } from "../redux/currencySlice";
+import { useEffect } from "react";
 
 const SetCurrency = () => {
   const currency = useSelector((store) => store.currency);
-  console.log(currency);
+
+  useEffect(() => {
+    console.log(currency);
+  }, [currency]);
   // initialize dispatch variable
   const dispatch = useDispatch();
 
@@ -20,7 +24,7 @@ const SetCurrency = () => {
   return (
     <div>
       <CurrencyBtn type="button" onClick={handleClick}>
-        $ {currency}
+        {currency.symbol} {currency.name}
       </CurrencyBtn>
       {showOptions && (
         <CurrencyOptions>

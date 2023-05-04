@@ -10,6 +10,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
 ChartJS.register(
   CategoryScale,
@@ -27,6 +28,8 @@ const BarChartBtc = ({
   volumeLastUpdate,
 }) => {
   const theme = useTheme();
+  // currency user setting from redux
+  const currency = useSelector((store) => store.currency);
 
   const options = {
     responsive: true,
@@ -74,7 +77,9 @@ const BarChartBtc = ({
     <Container>
       <ChartInformation>
         <h2>Volume 24h</h2>
-        <BtcVolume>$ {btcCurrentVolume}</BtcVolume>
+        <BtcVolume>
+          {currency.symbol} {btcCurrentVolume}
+        </BtcVolume>
         <LastUpdate>{volumeLastUpdate}</LastUpdate>
       </ChartInformation>
       {!isLoaded ? (

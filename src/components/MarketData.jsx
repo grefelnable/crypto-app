@@ -5,8 +5,11 @@ import ProgressBar from "./progress-bar.component";
 import btcImage from "../assets/bitcoin.png";
 import ethImage from "../assets/eth.png";
 import { ReactComponent as DotIcon } from "../assets/dot-icon.svg";
+import { useSelector } from "react-redux";
 
 const MarketData = () => {
+  const currency = useSelector((store) => store.currency);
+
   const [totalMarketCap, setTotalMarketCap] = useState(0);
   const [coins, setCoins] = useState(0);
   const [exchange, setExchange] = useState(0);
@@ -21,8 +24,8 @@ const MarketData = () => {
       const items = await response.json();
       setCoins(items.data.active_cryptocurrencies);
       setExchange(items.data.markets);
-      setTotalMarketCap(items.data.total_market_cap.usd);
-      setTotalVolume(items.data.total_volume.usd);
+      setTotalMarketCap(items.data.total_market_cap[`${currency.name}`]);
+      setTotalVolume(items.data.total_volume[`${currency.name}`]);
       setBtcMarketCapPercentage(
         Math.floor(items.data.market_cap_percentage.btc)
       );
@@ -31,7 +34,7 @@ const MarketData = () => {
       );
     };
     fetchMarketData().catch(console.error);
-  }, []);
+  }, [currency]);
 
   return (
     <Container>
@@ -39,10 +42,16 @@ const MarketData = () => {
         <li className="display-none">Coins: {coins.toLocaleString("en-US")}</li>
         <li className="display-none">Exchange: {exchange}</li>
         <li className="display-flex">
-          <DotIconStyled />${formatCompactNumber(totalMarketCap)}
+          <DotIconStyled />
+          {/* display currency symbol */}
+          {currency.symbol}
+          {formatCompactNumber(totalMarketCap)}
         </li>
         <li className="display-flex">
-          <DotIconStyled />${formatCompactNumber(totalVolume)}
+          <DotIconStyled />
+          {/* display currency symbol */}
+          {currency.symbol}
+          {formatCompactNumber(totalVolume)}
         </li>
         <li className=" display-flex">
           <img src={btcImage} alt="btc image" />{" "}

@@ -18,7 +18,7 @@ const Home = () => {
   const [btcCurrentVolume, setBtcCurrentVolume] = useState(0);
   const [volumeLastUpdate, setVolumeLastUpdate] = useState(0);
 
-  const url = `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=180&interval=current`;
+  const url = `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency.name}&days=180&interval=current`;
 
   // Fetch data for charts
   useEffect(() => {
@@ -38,7 +38,7 @@ const Home = () => {
       setLastUpdate(moment(itemsPrices[180].x).format("MMM DD, YYYY"));
       setCoinData(itemsPrices);
       setCoinVolume(itemsVolume);
-      setBtcCurrentPrice(Number(itemsPrices[180].y).toLocaleString("en-US"));
+      setBtcCurrentPrice(Number(itemsPrices[180].y).toLocaleString());
       setBtcCurrentVolume(formatCompactNumber(itemsVolume[180].y));
       setVolumeLastUpdate(moment(itemsVolume[180].x).format("MMM DD, YYYY"));
     };

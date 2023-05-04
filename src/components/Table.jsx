@@ -122,10 +122,12 @@ const Table = () => {
                   <PercentageData>
                     <FlexContainer>
                       <FirstData color={firstColor}>
-                        <DotIcon /> ${formatCompactNumber(total_volume)}
+                        <DotIcon /> {currency.symbol}
+                        {formatCompactNumber(total_volume)}
                       </FirstData>
                       <SecondData color={secondColor}>
-                        <DotIcon /> ${formatCompactNumber(market_cap)}
+                        <DotIcon /> {currency.symbol}
+                        {formatCompactNumber(market_cap)}
                       </SecondData>
                     </FlexContainer>
                     <PercentageBar color={secondColor}>

@@ -5,10 +5,11 @@ import moment from "moment";
 import BarChartBtc from "../components/Charts/BarChartBtc";
 import { formatCompactNumber } from "../utils/FormatNumber";
 import Table from "../components/Table";
+import { useSelector } from "react-redux";
 
-const url =
-  "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=180&interval=current";
 const Home = () => {
+  const currency = useSelector((store) => store.currency);
+
   const [isLoaded, setIsLoaded] = useState(false);
   const [coinData, setCoinData] = useState([{}]);
   const [lastUpdate, setLastUpdate] = useState(0);
@@ -16,6 +17,8 @@ const Home = () => {
   const [coinVolume, setCoinVolume] = useState([{}]);
   const [btcCurrentVolume, setBtcCurrentVolume] = useState(0);
   const [volumeLastUpdate, setVolumeLastUpdate] = useState(0);
+
+  const url = `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=180&interval=current`;
 
   // Fetch data for charts
   useEffect(() => {
@@ -40,7 +43,10 @@ const Home = () => {
       setVolumeLastUpdate(moment(itemsVolume[180].x).format("MMM DD, YYYY"));
     };
     fetchBitcoinData().catch(console.error);
-  }, []);
+
+    // test
+    console.log(currency);
+  }, [currency]);
 
   return (
     <Container>

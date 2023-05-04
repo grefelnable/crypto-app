@@ -12,6 +12,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -23,12 +24,10 @@ ChartJS.register(
   Legend
 );
 
-const ChartsOverview = ({
-  coinData,
-  isLoaded,
-  lastUpdate,
-  btcCurrentPrice,
-}) => {
+const AreaChartBtc = ({ coinData, isLoaded, lastUpdate, btcCurrentPrice }) => {
+  // user's selected currency
+  const currency = useSelector((store) => store.currency);
+
   const theme = useTheme();
 
   const options = {
@@ -86,7 +85,9 @@ const ChartsOverview = ({
     <Container>
       <ChartInformation>
         <h2>Bitcoin</h2>
-        <BtcPrice>$ {btcCurrentPrice}</BtcPrice>
+        <BtcPrice>
+          {currency.symbol} {btcCurrentPrice}
+        </BtcPrice>
         <LastUpdate>{lastUpdate}</LastUpdate>
       </ChartInformation>
       {!isLoaded ? (
@@ -97,7 +98,7 @@ const ChartsOverview = ({
     </Container>
   );
 };
-export default ChartsOverview;
+export default AreaChartBtc;
 
 const Container = styled.article`
   border-radius: var(--borderRadius);

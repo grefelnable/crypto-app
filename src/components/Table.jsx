@@ -6,35 +6,35 @@ import { ReactComponent as DotIcon } from "../assets/dot-icon.svg";
 import { percentageColors } from "../data/percentageColors";
 import SparklineChart from "./Charts/SparklineChart";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useSelector } from "react-redux";
 
 // for production only; delete after
 import faker from "../faker";
 
-// url
-const url =
-  "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d";
 const Table = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [coinItems, setCoinItems] = useState([]);
 
+  const currency = useSelector((store) => store.currency);
+  // url
+  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`;
   // for production only; delete after
-  useEffect(() => {
-    setIsLoaded(true);
-    setCoinItems(faker);
-    console.log(coinItems);
-  }, []);
+  // useEffect(() => {
+  //   setIsLoaded(true);
+  //   setCoinItems(faker);
+  // }, []);
 
   // fetch coins information
-  // useEffect(() => {
-  //   const fetchCoinsInformation = async () => {
-  //     const response = await fetch(url);
-  //     const data = await response.json();
-  //     setIsLoaded(true);
-  //     setCoinItems(data);
-  //   };
+  useEffect(() => {
+    const fetchCoinsInformation = async () => {
+      const response = await fetch(url);
+      const data = await response.json();
+      setIsLoaded(true);
+      setCoinItems(data);
+    };
 
-  //   fetchCoinsInformation().catch(console.error);
-  // }, []);
+    fetchCoinsInformation().catch(console.error);
+  }, [currency]);
 
   if (!isLoaded) {
     return <div className="loader"></div>;
@@ -101,7 +101,7 @@ const Table = () => {
                     </NameContainer>
                   </CoinName>
                   <td>
-                    $
+                    {currency.symbol}
                     {current_price === 1
                       ? `${current_price}.00`
                       : current_price.toLocaleString()}

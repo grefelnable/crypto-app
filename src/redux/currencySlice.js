@@ -6,10 +6,10 @@ const getCurrency = () => {
     symbol: "$",
   };
   const currency = `${window?.localStorage?.getItem("currency")}`;
-  if (["usd", "cad", "eur", "gbp"].includes(currency))
-    return JSON.parse(currency);
+  console.log(currency);
+  if (currency === "null") return initialData;
 
-  return initialData;
+  return JSON.parse(currency);
 };
 
 // initial state as USD
@@ -42,6 +42,8 @@ export const currencySlice = createSlice({
     changeCurrency: (state, action) => (state = userCurrency(action.payload)),
   },
 });
+
+console.log(initialState);
 
 export const { changeCurrency } = currencySlice.actions;
 

@@ -6,7 +6,8 @@ const getCurrency = () => {
     symbol: "$",
   };
   const currency = `${window?.localStorage?.getItem("currency")}`;
-  if (["usd", "cad", "eur", "gbp"].includes(currency)) return currency;
+  if (["usd", "cad", "eur", "gbp"].includes(currency))
+    return JSON.parse(currency);
 
   return initialData;
 };

@@ -12,11 +12,21 @@ import { useEffect } from "react";
 function App() {
   // Get theme from store
   const theme = useSelector((state) => state.theme);
+  // Get currency from store
+  const currency = useSelector((store) => store.currency);
 
+  // Save theme setting on local storage
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
+  // Save currency setting on local storage
+  useEffect(() => {
+    document.documentElement.dataset.currency = currency;
+    console.log(currency);
+    localStorage.setItem("currency", JSON.stringify(currency));
+  }, [currency]);
+
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <>

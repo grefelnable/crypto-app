@@ -1,10 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// initial state as USD
-const initialState = {
-  name: "usd",
-  symbol: "$",
+const getCurrency = () => {
+  const initialData = {
+    name: "usd",
+    symbol: "$",
+  };
+  const currency = `${window?.localStorage?.getItem("currency")}`;
+  if (["usd", "cad", "eur", "gbp"].includes(currency)) return currency;
+
+  return initialData;
 };
+
+// initial state as USD
+const initialState = getCurrency();
 
 // user selected currency
 const userCurrency = (selectedCurrency) => {

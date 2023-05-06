@@ -29,10 +29,20 @@ const ThemeBtn = styled.button`
   background-color: ${({ theme }) => theme.toggleBtn};
   padding: 7px 10px;
   transition: var(--transition);
+
+  /* media query for small screens */
+  @media screen and (max-width: 768px) {
+    padding: 4px 7px;
+  }
 `;
 
 const StyledToggleIcon = styled(ToggleIcon)`
   fill: var(--grey-300);
   height: 25px;
   width: 25px;
+
+  /* media query for small screens */
+  @media screen and (max-width: 768px) {
+    height: 20px;
+  }
 `;

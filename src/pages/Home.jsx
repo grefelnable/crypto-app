@@ -43,9 +43,6 @@ const Home = () => {
       setVolumeLastUpdate(moment(itemsVolume[180].x).format("MMM DD, YYYY"));
     };
     fetchBitcoinData().catch(console.error);
-
-    // test
-    console.log(currency);
   }, [currency]);
 
   return (

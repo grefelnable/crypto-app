@@ -32,7 +32,11 @@ const userCurrency = (selectedCurrency) => {
       name: "eur",
       symbol: "€",
     };
-  } else return initialState;
+  } else if (selectedCurrency === "usd")
+    return {
+      name: "usd",
+      symbol: "$",
+    };
 };
 
 export const currencySlice = createSlice({

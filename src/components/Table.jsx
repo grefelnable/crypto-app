@@ -188,6 +188,9 @@ const CoinTable = styled.table`
   background: ${({ theme }) => theme.background};
   width: 100%;
   border-collapse: collapse;
+  td {
+    padding-right: 2px;
+  }
   /* align tbody with thead */
   th {
     text-align: left;
@@ -231,7 +234,7 @@ const ArrowIcon = styled(Arrow)`
 
 const PercentageData = styled.td`
   width: 180px;
-  padding-right: 1em;
+  margin-right: 2em;
 `;
 
 // align items using flexbox
@@ -239,7 +242,7 @@ const FlexContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-// container for coin data: total volume, ciculating supply and etc...
+// container for coin data: total volume, circulating supply and etc...
 const FirstData = styled.p`
   color: ${(props) => props.color};
   fill: ${(props) => props.color};

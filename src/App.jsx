@@ -20,10 +20,10 @@ function App() {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
+
   // Save currency setting on local storage
   useEffect(() => {
     document.documentElement.dataset.currency = currency;
-    console.log(currency);
     localStorage.setItem("currency", JSON.stringify(currency));
   }, [currency]);
 

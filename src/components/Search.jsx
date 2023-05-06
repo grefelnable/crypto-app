@@ -17,7 +17,6 @@ const Search = () => {
         .then((res) => res.json())
         .then(
           (result) => {
-            console.log(result.coins);
             setIsLoaded(true);
             setItems(result.coins);
           },
@@ -104,7 +103,7 @@ const SearchResults = styled.ul`
   position: absolute;
   padding: 1em 2em;
   padding-left: 1em;
-  right: 9.25em;
+  right: 15em;
   top: 2.85em;
   z-index: 10;
 `;

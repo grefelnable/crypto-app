@@ -46,8 +46,6 @@ export const currencySlice = createSlice({
   },
 });
 
-console.log(initialState);
-
 export const { changeCurrency } = currencySlice.actions;
 
 export default currencySlice.reducer;

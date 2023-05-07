@@ -13,10 +13,14 @@ import { Filter } from "../utils/icons";
 import faker from "../faker";
 
 const Table = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [coinItems, setCoinItems] = useState(faker);
-
+  // Get coinData from store
+  const coinData = useSelector((store) => store.coinData);
+  // Get currency from store
   const currency = useSelector((store) => store.currency);
+
+  const [isLoaded, setIsLoaded] = useState(false);
+  // const [coinItems, setCoinItems] = useState(faker);
+
   // url
   const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`;
   // Sort Name alphabetically
@@ -48,7 +52,7 @@ const Table = () => {
   return (
     <Container>
       <InfiniteScroll
-        dataLength={coinItems.length}
+        dataLength={coinData.length}
         loader={<h4>Loading...</h4>}
         endMessage={
           <p style={{ textAlign: "center" }}>
@@ -84,7 +88,7 @@ const Table = () => {
               <th>Last 7d</th>
             </tr>
           </thead>
-          {coinItems.map((item, index) => {
+          {coinData.map((item, index) => {
             // Different Colors for percentage bar
             const firstColor =
               // Access color by its index on the percentageColor array of objects

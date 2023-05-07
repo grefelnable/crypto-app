@@ -6,7 +6,6 @@ const getCurrency = () => {
     symbol: "$",
   };
   const currency = `${window?.localStorage?.getItem("currency")}`;
-  console.log(currency);
   if (currency === "null") return initialData;
 
   return JSON.parse(currency);

@@ -7,21 +7,27 @@ import { percentageColors } from "../data/percentageColors";
 import SparklineChart from "./Charts/SparklineChart";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector } from "react-redux";
+import { Filter } from "../utils/icons";
 
 // for production only; delete after
 import faker from "../faker";
 
 const Table = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [coinItems, setCoinItems] = useState([]);
+  const [coinItems, setCoinItems] = useState(faker);
 
   const currency = useSelector((store) => store.currency);
   // url
   const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`;
+  // Sort Name alphabetically
+  const handleSortName = () => {
+    const sortByName = coinItems.sort((a, b) => (a.name > b.name ? 1 : -1));
+    setCoinItems(sortByName);
+    console.log(coinItems);
+  };
   // for production only; delete after
   useEffect(() => {
     setIsLoaded(true);
-    setCoinItems(faker);
   }, []);
 
   // // fetch coins information
@@ -54,8 +60,22 @@ const Table = () => {
           <thead>
             <tr>
               <th className="display-none">#</th>
-              <th>Name</th>
-              <th>Price</th>
+              <th>
+                <Flex>
+                  Name
+                  <SortNameBtn onClick={handleSortName}>
+                    <Filter />
+                  </SortNameBtn>
+                </Flex>
+              </th>
+              <th>
+                <Flex>
+                  Price
+                  <SortPriceBtn>
+                    <Filter />
+                  </SortPriceBtn>
+                </Flex>
+              </th>
               <th>1h%</th>
               <th>24h%</th>
               <th>7d%</th>
@@ -101,7 +121,7 @@ const Table = () => {
                     </NameContainer>
                   </CoinName>
                   <td>
-                    {currency.symbol}
+                    {currency.symbol}{" "}
                     {current_price === 1
                       ? `${current_price}.00`
                       : current_price.toLocaleString()}
@@ -204,6 +224,32 @@ const CoinTable = styled.table`
 
   tbody tr {
     border-bottom: 1px solid ${({ theme }) => theme.backgroundVariant};
+  }
+`;
+
+const Flex = styled.div`
+  display: flex;
+  align-items: center;
+  border: 1px solid magenta;
+`;
+
+const SortNameBtn = styled.button`
+  cursor: pointer;
+  width: 28px;
+  background: transparent;
+  border: none;
+  svg {
+    color: ${({ theme }) => theme.text};
+  }
+`;
+
+const SortPriceBtn = styled.button`
+  cursor: pointer;
+  width: 28px;
+  background: transparent;
+  border: none;
+  svg {
+    color: ${({ theme }) => theme.text};
   }
 `;
 

@@ -8,7 +8,6 @@ const initialState = faker;
 const handleSortName = () => {
   const coinForSort = [...initialState];
   const sortByName = coinForSort.sort((a, b) => (a.name > b.name ? 1 : -1));
-  console.log(sortByName);
   return sortByName;
 };
 

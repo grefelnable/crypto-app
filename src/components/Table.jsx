@@ -6,8 +6,9 @@ import { ReactComponent as DotIcon } from "../assets/dot-icon.svg";
 import { percentageColors } from "../data/percentageColors";
 import SparklineChart from "./Charts/SparklineChart";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Filter } from "../utils/icons";
+import { sortName } from "../redux/coinSlice";
 
 // for production only; delete after
 import faker from "../faker";
@@ -15,6 +16,7 @@ import faker from "../faker";
 const Table = () => {
   // Get coinData from store
   const coinData = useSelector((store) => store.coinData);
+  const dispatch = useDispatch();
   // Get currency from store
   const currency = useSelector((store) => store.currency);
 
@@ -67,7 +69,7 @@ const Table = () => {
               <th>
                 <Flex>
                   Name
-                  <SortNameBtn onClick={handleSortName}>
+                  <SortNameBtn onClick={() => dispatch(sortName())}>
                     <Filter />
                   </SortNameBtn>
                 </Flex>

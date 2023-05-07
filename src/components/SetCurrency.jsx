@@ -22,7 +22,6 @@ const SetCurrency = () => {
   const handleChangeCurrency = (e) => {
     dispatch(changeCurrency(e.target.value));
     setShowOptions(!showOptions);
-    console.log("clicked", e.target.value);
   };
   return (
     <Container>

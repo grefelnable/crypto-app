@@ -25,12 +25,7 @@ const Table = () => {
 
   // url
   const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`;
-  // Sort Name alphabetically
-  const handleSortName = () => {
-    const sortByName = coinItems.sort((a, b) => (a.name > b.name ? 1 : -1));
-    setCoinItems(sortByName);
-    console.log(coinItems);
-  };
+
   // for production only; delete after
   useEffect(() => {
     setIsLoaded(true);
@@ -236,7 +231,6 @@ const CoinTable = styled.table`
 const Flex = styled.div`
   display: flex;
   align-items: center;
-  border: 1px solid magenta;
 `;
 
 const SortNameBtn = styled.button`
@@ -244,20 +238,14 @@ const SortNameBtn = styled.button`
   width: 28px;
   background: transparent;
   border: none;
+  display: grid;
+  place-items: center;
   svg {
     color: ${({ theme }) => theme.text};
   }
 `;
 
-const SortPriceBtn = styled.button`
-  cursor: pointer;
-  width: 28px;
-  background: transparent;
-  border: none;
-  svg {
-    color: ${({ theme }) => theme.text};
-  }
-`;
+const SortPriceBtn = styled(SortNameBtn)``;
 
 const CoinName = styled.td`
   width: 250px;

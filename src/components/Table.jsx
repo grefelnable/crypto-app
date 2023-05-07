@@ -19,22 +19,22 @@ const Table = () => {
   // url
   const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`;
   // for production only; delete after
-  // useEffect(() => {
-  //   setIsLoaded(true);
-  //   setCoinItems(faker);
-  // }, []);
-
-  // fetch coins information
   useEffect(() => {
-    const fetchCoinsInformation = async () => {
-      const response = await fetch(url);
-      const data = await response.json();
-      setIsLoaded(true);
-      setCoinItems(data);
-    };
+    setIsLoaded(true);
+    setCoinItems(faker);
+  }, []);
 
-    fetchCoinsInformation().catch(console.error);
-  }, [currency]);
+  // // fetch coins information
+  // useEffect(() => {
+  //   const fetchCoinsInformation = async () => {
+  //     const response = await fetch(url);
+  //     const data = await response.json();
+  //     setIsLoaded(true);
+  //     setCoinItems(data);
+  //   };
+
+  //   fetchCoinsInformation().catch(console.error);
+  // }, [currency]);
 
   if (!isLoaded) {
     return <div className="loader"></div>;
@@ -119,41 +119,47 @@ const Table = () => {
                     {Math.abs(weeklyChange.toFixed(2))}%
                   </PriceChange>
                   {/* 24h Volume / Market Cap */}
-                  <PercentageData>
-                    <FlexContainer>
-                      <FirstData color={firstColor}>
-                        <DotIcon /> {currency.symbol}
-                        {formatCompactNumber(total_volume)}
-                      </FirstData>
-                      <SecondData color={secondColor}>
-                        <DotIcon /> {currency.symbol}
-                        {formatCompactNumber(market_cap)}
-                      </SecondData>
-                    </FlexContainer>
-                    <PercentageBar color={secondColor}>
-                      <Bar
-                        percent={(total_volume / market_cap) * 100}
-                        color={firstColor}
-                      ></Bar>
-                    </PercentageBar>
-                  </PercentageData>
+                  <td>
+                    <Wrapper>
+                      <FlexContainer>
+                        <FirstData color={firstColor}>
+                          <DotIcon /> {currency.symbol}
+                          {formatCompactNumber(total_volume)}
+                        </FirstData>
+                        <SecondData color={secondColor}>
+                          <DotIcon /> {currency.symbol}
+                          {formatCompactNumber(market_cap)}
+                        </SecondData>
+                      </FlexContainer>
+                      <PercentageBar color={secondColor}>
+                        <Bar
+                          percent={(total_volume / market_cap) * 100}
+                          color={firstColor}
+                        ></Bar>
+                      </PercentageBar>
+                    </Wrapper>
+                  </td>
                   {/* Circulating / Total Supply */}
-                  <PercentageData>
-                    <FlexContainer>
-                      <FirstData color={firstColor}>
-                        <DotIcon /> ${formatCompactNumber(circulating_supply)}
-                      </FirstData>
-                      <SecondData color={secondColor}>
-                        <DotIcon /> ${formatCompactNumber(total_supply)}
-                      </SecondData>
-                    </FlexContainer>
-                    <PercentageBar color={secondColor}>
-                      <Bar
-                        percent={(circulating_supply / total_supply) * 100}
-                        color={firstColor}
-                      ></Bar>
-                    </PercentageBar>
-                  </PercentageData>
+                  <td>
+                    <Wrapper>
+                      <FlexContainer>
+                        <FirstData color={firstColor}>
+                          <DotIcon /> {currency.symbol}
+                          {formatCompactNumber(circulating_supply)}
+                        </FirstData>
+                        <SecondData color={secondColor}>
+                          <DotIcon /> {currency.symbol}
+                          {formatCompactNumber(total_supply)}
+                        </SecondData>
+                      </FlexContainer>
+                      <PercentageBar color={secondColor}>
+                        <Bar
+                          percent={(circulating_supply / total_supply) * 100}
+                          color={firstColor}
+                        ></Bar>
+                      </PercentageBar>
+                    </Wrapper>
+                  </td>
                   <td>
                     <SparklineChart
                       sparklineData={sparkline_in_7d}
@@ -199,10 +205,6 @@ const CoinTable = styled.table`
   tbody tr {
     border-bottom: 1px solid ${({ theme }) => theme.backgroundVariant};
   }
-
-  /* stick table head */
-  position: relative;
-  left: 2px;
 `;
 
 const CoinName = styled.td`
@@ -232,9 +234,8 @@ const ArrowIcon = styled(Arrow)`
   transform: ${(props) => (props.price > 0 ? "none" : "rotate(180deg)")};
 `;
 
-const PercentageData = styled.td`
-  width: 180px;
-  margin-right: 2em;
+const Wrapper = styled.div`
+  margin-right: 0.5em;
 `;
 
 // align items using flexbox
@@ -255,7 +256,7 @@ const SecondData = styled.p`
 
 const PercentageBar = styled.div`
   width: 100%;
-  min-width: 200px;
+  min-width: 120px;
   height: 8px;
   background: ${(props) => props.color};
   border-radius: var(--borderRadius);

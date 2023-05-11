@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { lightTheme, darkTheme } from "./theme/Theme";
 import { GlobalStyles } from "./theme/Global";
 import Home from "./pages/Home";
@@ -8,6 +8,7 @@ import Error from "./pages/Error";
 import SharedLayout from "./components/SharedLayout";
 import Portfolio from "./pages/Portfolio";
 import { useEffect } from "react";
+import { fetchCoins } from "./redux/coinSlice";
 
 function App() {
   // Get theme from store
@@ -15,6 +16,11 @@ function App() {
   // Get currency from store
   const currency = useSelector((store) => store.currency);
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCoins());
+  }, []);
   // Save theme setting on local storage
   useEffect(() => {
     document.documentElement.dataset.theme = theme;

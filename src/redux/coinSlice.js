@@ -31,22 +31,18 @@ const initialState = {
 // Fetch coins from API
 export const fetchCoins = createAsyncThunk("coins/fetchCoins", async () => {
   const response = await axios.get(BASE_URL);
-  console.log(response);
   return response?.data;
 });
-
-// Sort coin name alphabetically
-const handleSortName = () => {
-  const coinForSort = [...initialState];
-  const sortByName = coinForSort.sort((a, b) => (a.name > b.name ? 1 : -1));
-  return sortByName;
-};
-
 export const coinSlice = createSlice({
   name: "coins",
   initialState,
   reducers: {
-    sortName: (state) => (state = handleSortName()),
+    sortName: (state, action) => {
+      const coinsForSort = [...action.payload];
+      console.log(action.payload);
+      state.coins = coinsForSort.sort((a, b) => (a.name > b.name ? 1 : -1));
+      console.log(state.coins);
+    },
   },
   extraReducers(builder) {
     builder
@@ -55,7 +51,7 @@ export const coinSlice = createSlice({
       })
       .addCase(fetchCoins.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.coins = state.coins.concat(action.payload);
+        state.coins = action.payload;
       })
       .addCase(fetchCoins.rejected, (state, action) => {
         state.status = "failed";
@@ -63,11 +59,6 @@ export const coinSlice = createSlice({
       });
   },
 });
-
-// Selectors
-export const selectAllCoins = (state) => state.coins.coins;
-export const getCoinsStatus = (state) => state.coins.status;
-export const getCoinsError = (state) => state.coins.error;
 
 export const { sortName } = coinSlice.actions;
 

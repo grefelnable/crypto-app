@@ -14,42 +14,27 @@ import { sortName } from "../redux/coinSlice";
 import faker from "../faker";
 
 const Table = () => {
-  // Get coinData from store
-  const coinData = useSelector((store) => store.coinData);
   const dispatch = useDispatch();
-  // Get currency from store
+
+  // fetch user currency setting
   const currency = useSelector((store) => store.currency);
+  const coinData = useSelector((store) => store.coins);
+  console.log(coinData);
+  // Sort coin name alphabetically
+  const handleSortName = () => {
+    const coinForSort = [...coinData];
+    const sortByName = coinForSort.sort((a, b) => (a.name > b.name ? 1 : -1));
+    console.log(sortByName);
+    setCoinItems(sortByName);
+  };
 
-  const [isLoaded, setIsLoaded] = useState(false);
-  // const [coinItems, setCoinItems] = useState(faker);
-
-  // url
-  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}&order=market_cap_desc&per_page=50&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`;
-
-  // for production only; delete after
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
-  // // fetch coins information
-  // useEffect(() => {
-  //   const fetchCoinsInformation = async () => {
-  //     const response = await fetch(url);
-  //     const data = await response.json();
-  //     setIsLoaded(true);
-  //     setCoinItems(data);
-  //   };
-
-  //   fetchCoinsInformation().catch(console.error);
-  // }, [currency]);
-
-  if (!isLoaded) {
-    return <div className="loader"></div>;
+  if (coinData.status === "loading" || coinData.status === "failed") {
+    return <div className="loader">{coinData.error}</div>;
   }
   return (
     <Container>
       <InfiniteScroll
-        dataLength={coinData.length}
+        dataLength={coinData.coins.length}
         loader={<h4>Loading...</h4>}
         endMessage={
           <p style={{ textAlign: "center" }}>
@@ -64,7 +49,12 @@ const Table = () => {
               <th>
                 <Flex>
                   Name
-                  <SortNameBtn onClick={() => dispatch(sortName())}>
+                  <SortNameBtn
+                    onClick={() => {
+                      console.log("clicked");
+                      dispatch(sortName(coinData.coins));
+                    }}
+                  >
                     <Filter />
                   </SortNameBtn>
                 </Flex>
@@ -85,7 +75,7 @@ const Table = () => {
               <th>Last 7d</th>
             </tr>
           </thead>
-          {coinData.map((item, index) => {
+          {coinData.coins.map((item, index) => {
             // Different Colors for percentage bar
             const firstColor =
               // Access color by its index on the percentageColor array of objects

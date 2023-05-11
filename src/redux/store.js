@@ -7,6 +7,6 @@ export default configureStore({
   reducer: {
     theme: themeSlice,
     currency: currencySlice,
-    coinData: coinSlice,
+    coins: coinSlice,
   },
 });

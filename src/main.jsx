@@ -7,6 +7,11 @@ import "normalize.css";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 
+// fetch coin data for Table.jsx
+import { fetchCoins } from "./redux/coinSlice";
+
+store.dispatch(fetchCoins());
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>

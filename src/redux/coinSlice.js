@@ -43,6 +43,12 @@ export const coinSlice = createSlice({
       state.coins = coinsForSort.sort((a, b) => (a.name > b.name ? 1 : -1));
       console.log(state.coins);
     },
+    sortPrice: (state, action) => {
+      const coinsForSort = [...action.payload];
+      state.coins = coinsForSort.sort((a, b) =>
+        a.current_price > b.current_price ? 1 : -1
+      );
+    },
   },
   extraReducers(builder) {
     builder
@@ -60,6 +66,6 @@ export const coinSlice = createSlice({
   },
 });
 
-export const { sortName } = coinSlice.actions;
+export const { sortName, sortPrice } = coinSlice.actions;
 
 export default coinSlice.reducer;

@@ -8,10 +8,7 @@ import SparklineChart from "./Charts/SparklineChart";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector, useDispatch } from "react-redux";
 import { Filter } from "../utils/icons";
-import { sortName } from "../redux/coinSlice";
-
-// for production only; delete after
-import faker from "../faker";
+import { sortName, sortPrice } from "../redux/coinSlice";
 
 const Table = () => {
   const dispatch = useDispatch();
@@ -20,13 +17,6 @@ const Table = () => {
   const currency = useSelector((store) => store.currency);
   const coinData = useSelector((store) => store.coins);
   console.log(coinData);
-  // Sort coin name alphabetically
-  const handleSortName = () => {
-    const coinForSort = [...coinData];
-    const sortByName = coinForSort.sort((a, b) => (a.name > b.name ? 1 : -1));
-    console.log(sortByName);
-    setCoinItems(sortByName);
-  };
 
   if (coinData.status === "loading" || coinData.status === "failed") {
     return <div className="loader">{coinData.error}</div>;
@@ -62,7 +52,12 @@ const Table = () => {
               <th>
                 <Flex>
                   Price
-                  <SortPriceBtn>
+                  <SortPriceBtn
+                    onClick={() => {
+                      console.log("clicked");
+                      dispatch(sortPrice(coinData.coins));
+                    }}
+                  >
                     <Filter />
                   </SortPriceBtn>
                 </Flex>

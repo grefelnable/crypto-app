@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
 import { ReactComponent as Arrow } from "../assets/arrow-icon.svg";
 import { formatCompactNumber } from "../utils/FormatNumber";
 import { ReactComponent as DotIcon } from "../assets/dot-icon.svg";
@@ -15,6 +14,8 @@ import {
   sortPrice,
   sortWeeklyPercentage,
 } from "../redux/coinSlice";
+import { selectCoin } from "../redux/individualCoinSlice";
+import { Link } from "react-router-dom";
 
 const Table = () => {
   const dispatch = useDispatch();
@@ -135,7 +136,10 @@ const Table = () => {
                 <tr>
                   <td className="display-none">{index + 1}</td>
                   <CoinName>
-                    <NameContainer>
+                    <NameContainer
+                      to="coin"
+                      onClick={() => dispatch(selectCoin(name))}
+                    >
                       <img src={image} alt={`Thumbnail of ${name}`} />
                       <p>
                         {name} <span>({symbol})</span>
@@ -270,7 +274,8 @@ const CoinName = styled.td`
   width: 250px;
 `;
 
-const NameContainer = styled.div`
+const NameContainer = styled(Link)`
+  color: inherit;
   display: flex;
   gap: 0.75em;
   align-items: center;

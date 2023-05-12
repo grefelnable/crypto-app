@@ -35,6 +35,7 @@ export const fetchCoins = createAsyncThunk("coins/fetchCoins", async () => {
   console.log(response?.data);
   return response?.data;
 });
+
 export const coinSlice = createSlice({
   name: "coins",
   initialState,

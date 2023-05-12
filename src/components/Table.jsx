@@ -22,7 +22,6 @@ const Table = () => {
   // fetch user currency setting
   const currency = useSelector((store) => store.currency);
   const coinData = useSelector((store) => store.coins);
-  console.log(coinData);
 
   if (coinData.status === "loading" || coinData.status === "failed") {
     return <div className="loader">{coinData.error}</div>;

@@ -39,14 +39,39 @@ export const coinSlice = createSlice({
   reducers: {
     sortName: (state, action) => {
       const coinsForSort = [...action.payload];
-      console.log(action.payload);
       state.coins = coinsForSort.sort((a, b) => (a.name > b.name ? 1 : -1));
-      console.log(state.coins);
     },
     sortPrice: (state, action) => {
       const coinsForSort = [...action.payload];
       state.coins = coinsForSort.sort((a, b) =>
         a.current_price > b.current_price ? 1 : -1
+      );
+    },
+    sortHourlyPercentage: (state, action) => {
+      const coinsForSort = [...action.payload];
+      state.coins = coinsForSort.sort((a, b) =>
+        a.price_change_percentage_1h_in_currency >
+        b.price_change_percentage_1h_in_currency
+          ? 1
+          : -1
+      );
+    },
+    sortDailyPercentage: (state, action) => {
+      const coinsForSort = [...action.payload];
+      state.coins = coinsForSort.sort((a, b) =>
+        a.price_change_percentage_24h_in_currency >
+        b.price_change_percentage_24h_in_currency
+          ? 1
+          : -1
+      );
+    },
+    sortWeeklyPercentage: (state, action) => {
+      const coinsForSort = [...action.payload];
+      state.coins = coinsForSort.sort((a, b) =>
+        a.price_change_percentage_7d_in_currency >
+        b.price_change_percentage_7d_in_currency
+          ? 1
+          : -1
       );
     },
   },
@@ -66,6 +91,12 @@ export const coinSlice = createSlice({
   },
 });
 
-export const { sortName, sortPrice } = coinSlice.actions;
+export const {
+  sortName,
+  sortPrice,
+  sortHourlyPercentage,
+  sortDailyPercentage,
+  sortWeeklyPercentage,
+} = coinSlice.actions;
 
 export default coinSlice.reducer;

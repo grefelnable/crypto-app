@@ -8,7 +8,13 @@ import SparklineChart from "./Charts/SparklineChart";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector, useDispatch } from "react-redux";
 import { Filter } from "../utils/icons";
-import { sortName, sortPrice } from "../redux/coinSlice";
+import {
+  sortDailyPercentage,
+  sortHourlyPercentage,
+  sortName,
+  sortPrice,
+  sortWeeklyPercentage,
+} from "../redux/coinSlice";
 
 const Table = () => {
   const dispatch = useDispatch();
@@ -39,32 +45,63 @@ const Table = () => {
               <th>
                 <Flex>
                   Name
-                  <SortNameBtn
+                  <SortBtn
                     onClick={() => {
-                      console.log("clicked");
                       dispatch(sortName(coinData.coins));
                     }}
                   >
                     <Filter />
-                  </SortNameBtn>
+                  </SortBtn>
                 </Flex>
               </th>
               <th>
                 <Flex>
                   Price
-                  <SortPriceBtn
+                  <SortBtn
                     onClick={() => {
-                      console.log("clicked");
                       dispatch(sortPrice(coinData.coins));
                     }}
                   >
                     <Filter />
-                  </SortPriceBtn>
+                  </SortBtn>
                 </Flex>
               </th>
-              <th>1h%</th>
-              <th>24h%</th>
-              <th>7d%</th>
+              <th>
+                <Flex>
+                  1h%
+                  <SortBtn
+                    onClick={() => {
+                      dispatch(sortHourlyPercentage(coinData.coins));
+                    }}
+                  >
+                    <Filter />
+                  </SortBtn>
+                </Flex>
+              </th>
+              <th>
+                <Flex>
+                  24h%
+                  <SortBtn
+                    onClick={() => {
+                      dispatch(sortDailyPercentage(coinData.coins));
+                    }}
+                  >
+                    <Filter />
+                  </SortBtn>
+                </Flex>
+              </th>
+              <th>
+                <Flex>
+                  7d%
+                  <SortBtn
+                    onClick={() => {
+                      dispatch(sortWeeklyPercentage(coinData.coins));
+                    }}
+                  >
+                    <Filter />
+                  </SortBtn>
+                </Flex>
+              </th>
               <th>24h Volume/Market Cap</th>
               <th>Circulating/Total Supply</th>
               <th>Last 7d</th>
@@ -218,7 +255,7 @@ const Flex = styled.div`
   align-items: center;
 `;
 
-const SortNameBtn = styled.button`
+const SortBtn = styled.button`
   cursor: pointer;
   width: 28px;
   background: transparent;
@@ -229,8 +266,6 @@ const SortNameBtn = styled.button`
     color: ${({ theme }) => theme.text};
   }
 `;
-
-const SortPriceBtn = styled(SortNameBtn)``;
 
 const CoinName = styled.td`
   width: 250px;

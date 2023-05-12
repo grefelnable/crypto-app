@@ -9,6 +9,7 @@ import SharedLayout from "./components/SharedLayout";
 import Portfolio from "./pages/Portfolio";
 import { useEffect } from "react";
 import { fetchCoins } from "./redux/coinSlice";
+import CoinInformation from "./pages/CoinInformation";
 
 function App() {
   // Get theme from store
@@ -40,6 +41,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SharedLayout />}>
             <Route index element={<Home />} />
+            <Route path="/coin" element={<CoinInformation />} />
             <Route path="/portfolio" element={<Portfolio />} />
           </Route>
           <Route path="*" element={<Error />} />

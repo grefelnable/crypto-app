@@ -136,10 +136,7 @@ const Table = () => {
                 <tr>
                   <td className="display-none">{index + 1}</td>
                   <CoinName>
-                    <NameContainer
-                      to="coin"
-                      onClick={() => dispatch(selectCoin(name))}
-                    >
+                    <NameContainer to="coin">
                       <img src={image} alt={`Thumbnail of ${name}`} />
                       <p>
                         {name} <span>({symbol})</span>

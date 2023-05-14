@@ -29,8 +29,8 @@ const initialState = {
 
 // Fetch coins from API
 export const fetchCoins = createAsyncThunk("coins/fetchCoins", async () => {
-  // const response = await axios.get(BASE_URL);
-  const response = await axios.get(FAKE_URL);
+  const response = await axios.get(BASE_URL);
+  // const response = await axios.get(FAKE_URL);
   return response?.data;
 });
 

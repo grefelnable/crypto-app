@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = "";
+const getSelectedCoin = () => {
+  const coin = `${window?.localStorage?.getItem("coin")}`;
+  if (coin === "null") return "";
+
+  return JSON.parse(coin);
+};
+
+const initialState = getSelectedCoin();
 
 export const individualCoinSlice = createSlice({
   name: "singleCoin",

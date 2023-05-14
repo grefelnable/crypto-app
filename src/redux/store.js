@@ -11,4 +11,8 @@ export default configureStore({
     coins: coinSlice,
     singleCoin: individualCoinSlice,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });

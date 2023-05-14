@@ -4,20 +4,17 @@ const getSelectedCoin = () => {
   const coin = `${window?.localStorage?.getItem("coin")}`;
   if (coin === "null") return "";
 
-  return JSON.parse(coin);
+  return coin;
 };
 
-const initialState = getSelectedCoin();
+// const initialState = getSelectedCoin();
+const initialState = "bitcoin";
 
 export const individualCoinSlice = createSlice({
   name: "singleCoin",
   initialState,
   reducers: {
-    selectCoin: (state, action) => {
-      console.log(action.payload);
-      state = action.payload;
-      console.log(state);
-    },
+    selectCoin: (state, action) => (state = action.payload),
   },
 });
 

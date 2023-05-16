@@ -7,9 +7,10 @@ const LinkBtns = () => {
       <StyledNavLink active="active" to="/">
         Coins
       </StyledNavLink>
-      <StyledNavLink active="active" to="/portfolio">
+      {/* Portfolio button -- disabled until you will be working on it */}
+      {/* <StyledNavLink active="active" to="/portfolio">
         Portfolio
-      </StyledNavLink>
+      </StyledNavLink> */}
     </BtnGroup>
   );
 };

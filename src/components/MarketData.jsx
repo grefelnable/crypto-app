@@ -84,7 +84,7 @@ const MarketData = () => {
               <ProgressBar percentage={btcMarketCapPercentage} />
             </>
           ) : (
-            <Skeleton width={70} />
+            <Skeleton width={100} />
           )}
         </li>
         <li className="display-flex">
@@ -94,7 +94,7 @@ const MarketData = () => {
               <ProgressBar percentage={ethMarketCapPercentage} />
             </>
           ) : (
-            <Skeleton width={70} />
+            <Skeleton width={100} />
           )}
         </li>
       </ListContainer>

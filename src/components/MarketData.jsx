@@ -6,6 +6,9 @@ import btcImage from "../assets/bitcoin.png";
 import ethImage from "../assets/eth.png";
 import { ReactComponent as DotIcon } from "../assets/dot-icon.svg";
 import { useSelector } from "react-redux";
+// react loading skeleton imports
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const MarketData = () => {
   const currency = useSelector((store) => store.currency);
@@ -16,12 +19,14 @@ const MarketData = () => {
   const [totalVolume, setTotalVolume] = useState(0);
   const [btcMarketCapPercentage, setBtcMarketCapPercentage] = useState(0);
   const [ethMarketCapPercentage, setEthMarketCapPercentage] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // fetch data from https://api.coingecko.com/api/v3/global
   useEffect(() => {
     const fetchMarketData = async () => {
       const response = await fetch("https://api.coingecko.com/api/v3/global");
       const items = await response.json();
+      setIsLoaded(true);
       setCoins(items.data.active_cryptocurrencies);
       setExchange(items.data.markets);
       setTotalMarketCap(items.data.total_market_cap[`${currency.name}`]);
@@ -39,28 +44,58 @@ const MarketData = () => {
   return (
     <Container>
       <ListContainer>
-        <li className="display-none">Coins: {coins.toLocaleString("en-US")}</li>
-        <li className="display-none">Exchange: {exchange}</li>
-        <li className="display-flex">
-          <DotIconStyled />
-          {/* display currency symbol */}
-          {currency.symbol}
-          {formatCompactNumber(totalMarketCap)}
+        <li className="display-none">
+          {isLoaded ? (
+            `Coins: ${coins.toLocaleString("en-US")}`
+          ) : (
+            <Skeleton width={100} />
+          )}
+        </li>
+        <li className="display-none">
+          {isLoaded ? `Exchange: ${exchange}` : <Skeleton width={100} />}
         </li>
         <li className="display-flex">
-          <DotIconStyled />
-          {/* display currency symbol */}
-          {currency.symbol}
-          {formatCompactNumber(totalVolume)}
+          {isLoaded ? (
+            <>
+              <DotIconStyled />
+              {currency.symbol}
+              {formatCompactNumber(totalMarketCap)}
+            </>
+          ) : (
+            <Skeleton width={70} />
+          )}
+        </li>
+        <li className="display-flex">
+          {isLoaded ? (
+            <>
+              <DotIconStyled />
+              {currency.symbol}
+              {formatCompactNumber(totalVolume)}
+            </>
+          ) : (
+            <Skeleton width={70} />
+          )}
         </li>
         <li className=" display-flex">
-          <img src={btcImage} alt="btc image" />{" "}
-          <p>{btcMarketCapPercentage}% </p>
-          <ProgressBar percentage={btcMarketCapPercentage} />
+          {isLoaded ? (
+            <>
+              <img src={btcImage} alt="btc image" />{" "}
+              <p>{btcMarketCapPercentage}% </p>
+              <ProgressBar percentage={btcMarketCapPercentage} />
+            </>
+          ) : (
+            <Skeleton width={70} />
+          )}
         </li>
         <li className="display-flex">
-          <img src={ethImage} alt="eth image" /> {ethMarketCapPercentage}%
-          <ProgressBar percentage={ethMarketCapPercentage} />
+          {isLoaded ? (
+            <>
+              <img src={ethImage} alt="eth image" /> {ethMarketCapPercentage}%
+              <ProgressBar percentage={ethMarketCapPercentage} />
+            </>
+          ) : (
+            <Skeleton width={70} />
+          )}
         </li>
       </ListContainer>
     </Container>

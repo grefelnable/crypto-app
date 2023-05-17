@@ -13,6 +13,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { useSelector } from "react-redux";
+import Skeleton from "react-loading-skeleton";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -84,17 +85,21 @@ const AreaChartBtc = ({ coinData, isLoaded, lastUpdate, btcCurrentPrice }) => {
   return (
     <Container>
       <ChartInformation>
-        <h2>Bitcoin</h2>
-        <BtcPrice>
-          {currency.symbol} {btcCurrentPrice}
-        </BtcPrice>
-        <LastUpdate>{lastUpdate}</LastUpdate>
+        {isLoaded ? <h2>Bitcoin</h2> : <Skeleton width={70} height={28} />}
+        {isLoaded ? (
+          <BtcPrice>
+            {currency.symbol} {btcCurrentPrice}
+          </BtcPrice>
+        ) : (
+          <SkeletonCustom width={120} height={38} inline={true} />
+        )}
+        {isLoaded ? (
+          <LastUpdate>{lastUpdate}</LastUpdate>
+        ) : (
+          <Skeleton width={108} height={25} />
+        )}
       </ChartInformation>
-      {!isLoaded ? (
-        <div className="loading"></div>
-      ) : (
-        <Line options={options} data={data} />
-      )}
+      {isLoaded ? <Line options={options} data={data} /> : <SkeletonChart />}
     </Container>
   );
 };
@@ -134,4 +139,15 @@ const BtcPrice = styled.span`
 const LastUpdate = styled.span`
   font-size: 1.375rem;
   font-weight: 300;
+`;
+
+const SkeletonCustom = styled(Skeleton)`
+  margin-bottom: 0.5rem;
+`;
+
+const SkeletonChart = styled(Skeleton)`
+  margin-left: 1rem;
+  margin-bottom: 1em;
+  width: 95%;
+  height: 230px;
 `;

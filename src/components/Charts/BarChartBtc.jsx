@@ -11,6 +11,7 @@ import {
 import { Bar } from "react-chartjs-2";
 import moment from "moment";
 import { useSelector } from "react-redux";
+import Skeleton from "react-loading-skeleton";
 
 ChartJS.register(
   CategoryScale,
@@ -76,17 +77,21 @@ const BarChartBtc = ({
   return (
     <Container>
       <ChartInformation>
-        <h2>Volume 24h</h2>
-        <BtcVolume>
-          {currency.symbol} {btcCurrentVolume}
-        </BtcVolume>
-        <LastUpdate>{volumeLastUpdate}</LastUpdate>
+        {isLoaded ? <h2>Volume 24h</h2> : <Skeleton width={70} height={28} />}
+        {isLoaded ? (
+          <BtcVolume>
+            {currency.symbol} {btcCurrentVolume}
+          </BtcVolume>
+        ) : (
+          <SkeletonCustom width={120} height={38} inline={true} />
+        )}
+        {isLoaded ? (
+          <LastUpdate>{volumeLastUpdate}</LastUpdate>
+        ) : (
+          <Skeleton width={108} height={25} />
+        )}
       </ChartInformation>
-      {!isLoaded ? (
-        <div className="loading"></div>
-      ) : (
-        <Bar options={options} data={data} />
-      )}
+      {isLoaded ? <Bar options={options} data={data} /> : <SkeletonChart />}
     </Container>
   );
 };
@@ -124,4 +129,15 @@ const BtcVolume = styled.span`
 const LastUpdate = styled.span`
   font-size: 1.375rem;
   font-weight: 300;
+`;
+
+const SkeletonCustom = styled(Skeleton)`
+  margin-bottom: 0.5rem;
+`;
+
+const SkeletonChart = styled(Skeleton)`
+  margin-left: 1rem;
+  margin-bottom: 1em;
+  width: 95%;
+  height: 230px;
 `;

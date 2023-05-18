@@ -4,7 +4,7 @@ import BitcoinChart from "../components/Charts/AreaChartBtc";
 import moment from "moment";
 import BarChartBtc from "../components/Charts/BarChartBtc";
 import { formatCompactNumber } from "../utils/FormatNumber";
-import Table from "../components/Table";
+import Table from "../components/Table/Table";
 import { useSelector } from "react-redux";
 
 const Home = () => {

@@ -1,21 +1,25 @@
 import styled from "styled-components";
-import { ReactComponent as Arrow } from "../assets/arrow-icon.svg";
-import { formatCompactNumber } from "../utils/FormatNumber";
-import { ReactComponent as DotIcon } from "../assets/dot-icon.svg";
-import { percentageColors } from "../data/percentageColors";
-import SparklineChart from "./Charts/SparklineChart";
+// CSS styling imports
+import { Container } from "./Table.styled";
+import { ReactComponent as Arrow } from "../../assets/arrow-icon.svg";
+import { formatCompactNumber } from "../../utils/FormatNumber";
+import { ReactComponent as DotIcon } from "../../assets/dot-icon.svg";
+import { percentageColors } from "../../data/percentageColors";
+import SparklineChart from "../Charts/SparklineChart";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector, useDispatch } from "react-redux";
-import { Filter } from "../utils/icons";
+import { Filter } from "../../utils/icons";
 import {
   sortDailyPercentage,
   sortHourlyPercentage,
   sortName,
   sortPrice,
   sortWeeklyPercentage,
-} from "../redux/coinSlice";
-import { selectCoin } from "../redux/individualCoinSlice";
+} from "../../redux/coinSlice";
+import { selectCoin } from "../../redux/individualCoinSlice";
 import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import CoinTableSkeleton from "./CoinTableSkeleton";
 
 const Table = () => {
   const dispatch = useDispatch();
@@ -24,19 +28,21 @@ const Table = () => {
   const currency = useSelector((store) => store.currency);
   const coinData = useSelector((store) => store.coins);
 
-  if (coinData.status === "loading" || coinData.status === "failed") {
-    return <div className="loader">{coinData.error}</div>;
+  if (coinData?.status === "failed") {
+    return (
+      <div>
+        <h3>{coinData.error}</h3>
+      </div>
+    );
+  }
+  if (coinData?.status === "loading" || coinData?.status === "idle") {
+    return <CoinTableSkeleton />;
   }
   return (
     <Container>
       <InfiniteScroll
         dataLength={coinData.coins.length}
-        loader={<h4>Loading...</h4>}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
+        loader={<Skeleton width={100} />}
       >
         <CoinTable>
           <thead>
@@ -135,21 +141,28 @@ const Table = () => {
               <tbody key={id}>
                 <tr>
                   <td className="display-none">{index + 1}</td>
-                  <CoinName>
-                    <NameContainer
-                      to="coin"
-                      onClick={() => {
-                        const coinName = name;
-                        console.log("coin:", name);
-                        dispatch(selectCoin(coinName));
-                      }}
-                    >
-                      <img src={image} alt={`Thumbnail of ${name}`} />
-                      <p>
-                        {name} <span>({symbol})</span>
-                      </p>
-                    </NameContainer>
-                  </CoinName>
+                  {coinData.status === "loading" ||
+                  coinData.status === "idle" ? (
+                    <td>
+                      <SkeletonCustom width={100} inline={false} />
+                    </td>
+                  ) : (
+                    <CoinName>
+                      <NameContainer
+                        to="coin"
+                        onClick={() => {
+                          console.log("coin:", name);
+                          dispatch(selectCoin(name));
+                        }}
+                      >
+                        <img src={image} alt={`Thumbnail of ${name}`} />
+                        <p>
+                          {name} <span>({symbol})</span>
+                        </p>
+                      </NameContainer>
+                    </CoinName>
+                  )}
+
                   <td>
                     {currency.symbol}{" "}
                     {current_price === 1
@@ -228,14 +241,10 @@ const Table = () => {
 export default Table;
 
 // CSS
-const Container = styled.div`
-  padding: 2em 1em;
-  background: ${({ theme }) => theme.background};
-  border-radius: var(--borderRadius);
-  img {
-    width: 26px;
-    height: 26px;
-  }
+
+// Skeleton custom CSS
+const SkeletonCustom = styled(Skeleton)`
+  margin-bottom: 0;
 `;
 
 const CoinTable = styled.table`

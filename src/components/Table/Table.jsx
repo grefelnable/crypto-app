@@ -1,6 +1,20 @@
-import styled from "styled-components";
 // CSS styling imports
-import { Container } from "./Table.styled";
+import {
+  Container,
+  CoinTable,
+  Flex,
+  SortBtn,
+  CoinName,
+  NameContainer,
+  PriceChange,
+  ArrowIcon,
+  Wrapper,
+  FlexContainer,
+  FirstData,
+  SecondData,
+  PercentageBar,
+  Bar,
+} from "./Table.styled";
 import { ReactComponent as Arrow } from "../../assets/arrow-icon.svg";
 import { formatCompactNumber } from "../../utils/FormatNumber";
 import { ReactComponent as DotIcon } from "../../assets/dot-icon.svg";
@@ -17,7 +31,6 @@ import {
   sortWeeklyPercentage,
 } from "../../redux/coinSlice";
 import { selectCoin } from "../../redux/individualCoinSlice";
-import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import CoinTableSkeleton from "./CoinTableSkeleton";
 
@@ -141,28 +154,20 @@ const Table = () => {
               <tbody key={id}>
                 <tr>
                   <td className="display-none">{index + 1}</td>
-                  {coinData.status === "loading" ||
-                  coinData.status === "idle" ? (
-                    <td>
-                      <SkeletonCustom width={100} inline={false} />
-                    </td>
-                  ) : (
-                    <CoinName>
-                      <NameContainer
-                        to="coin"
-                        onClick={() => {
-                          console.log("coin:", name);
-                          dispatch(selectCoin(name));
-                        }}
-                      >
-                        <img src={image} alt={`Thumbnail of ${name}`} />
-                        <p>
-                          {name} <span>({symbol})</span>
-                        </p>
-                      </NameContainer>
-                    </CoinName>
-                  )}
-
+                  <CoinName>
+                    <NameContainer
+                      to="coin"
+                      onClick={() => {
+                        console.log("coin:", name);
+                        dispatch(selectCoin(name));
+                      }}
+                    >
+                      <img src={image} alt={`Thumbnail of ${name}`} />
+                      <p>
+                        {name} <span>({symbol})</span>
+                      </p>
+                    </NameContainer>
+                  </CoinName>
                   <td>
                     {currency.symbol}{" "}
                     {current_price === 1
@@ -241,109 +246,3 @@ const Table = () => {
 export default Table;
 
 // CSS
-
-// Skeleton custom CSS
-const SkeletonCustom = styled(Skeleton)`
-  margin-bottom: 0;
-`;
-
-const CoinTable = styled.table`
-  font-size: 0.875rem;
-  font-weight: 400;
-  background: ${({ theme }) => theme.background};
-  width: 100%;
-  border-collapse: collapse;
-  td {
-    padding-right: 2px;
-  }
-  /* align tbody with thead */
-  th {
-    text-align: left;
-  }
-
-  tbody tr {
-    border-bottom: 1px solid ${({ theme }) => theme.backgroundVariant};
-  }
-`;
-
-const Flex = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const SortBtn = styled.button`
-  cursor: pointer;
-  width: 28px;
-  background: transparent;
-  border: none;
-  display: grid;
-  place-items: center;
-  svg {
-    color: ${({ theme }) => theme.text};
-  }
-`;
-
-const CoinName = styled.td`
-  width: 250px;
-`;
-
-const NameContainer = styled(Link)`
-  color: inherit;
-  display: flex;
-  gap: 0.75em;
-  align-items: center;
-  span {
-    text-transform: uppercase;
-  }
-`;
-
-const PriceChange = styled.td`
-  color: ${(props) => (props.price > 0 ? "#00FC2A" : "#FE1040")};
-  min-width: 70px;
-`;
-
-const ArrowIcon = styled(Arrow)`
-  /* Change color when market data changes */
-  stroke: ${(props) => (props.price > 0 ? "#00FC2A" : "#FE1040")};
-  fill: ${(props) => (props.price > 0 ? "#00FC2A" : "#FE1040")};
-  margin-bottom: 0.1875em;
-  margin-right: 0.25em;
-  transform: ${(props) => (props.price > 0 ? "none" : "rotate(180deg)")};
-`;
-
-const Wrapper = styled.div`
-  margin-right: 0.5em;
-`;
-
-// align items using flexbox
-const FlexContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-// container for coin data: total volume, circulating supply and etc...
-const FirstData = styled.p`
-  color: ${(props) => props.color};
-  fill: ${(props) => props.color};
-`;
-const SecondData = styled.p`
-  color: ${(props) => props.color};
-  fill: ${(props) => props.color};
-`;
-//  container for coin data end
-
-const PercentageBar = styled.div`
-  width: 100%;
-  min-width: 120px;
-  height: 8px;
-  background: ${(props) => props.color};
-  border-radius: var(--borderRadius);
-  /* Add space at the bottom before the border */
-  margin-bottom: 1.25em;
-`;
-
-const Bar = styled.div`
-  width: ${(props) => props.percent}%;
-  height: inherit;
-  background: ${(props) => props.color};
-  border-radius: var(--borderRadius);
-`;

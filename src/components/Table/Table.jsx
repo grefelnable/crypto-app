@@ -15,7 +15,7 @@ import {
   PercentageBar,
   Bar,
 } from "./Table.styled";
-import { ReactComponent as Arrow } from "../../assets/arrow-icon.svg";
+
 import { formatCompactNumber } from "../../utils/FormatNumber";
 import { ReactComponent as DotIcon } from "../../assets/dot-icon.svg";
 import { percentageColors } from "../../data/percentageColors";

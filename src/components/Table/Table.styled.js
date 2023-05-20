@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ReactComponent as Arrow } from "../../assets/arrow-icon.svg";
+import Skeleton from "react-loading-skeleton";
 
 export const Container = styled.div`
   padding: 2em 1em;
@@ -112,4 +113,8 @@ export const Bar = styled.div`
   height: inherit;
   background: ${(props) => props.color};
   border-radius: var(--borderRadius);
+`;
+
+export const SkeletonCustom = styled(Skeleton)`
+  display: block;
 `;

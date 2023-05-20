@@ -158,8 +158,8 @@ const Table = () => {
                     <NameContainer
                       to="coin"
                       onClick={() => {
-                        console.log("coin:", name);
-                        dispatch(selectCoin(name));
+                        console.log("coin:", id);
+                        dispatch(selectCoin(id));
                       }}
                     >
                       <img src={image} alt={`Thumbnail of ${name}`} />

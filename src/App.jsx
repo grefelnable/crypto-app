@@ -9,7 +9,7 @@ import SharedLayout from "./components/SharedLayout";
 import Portfolio from "./pages/Portfolio";
 import { useEffect } from "react";
 import { fetchCoins } from "./redux/coinSlice";
-import CoinInformation from "./pages/CoinInformation";
+import CoinInformation from "./pages/coin-information/CoinInformation";
 import { SkeletonTheme } from "react-loading-skeleton";
 
 function App() {

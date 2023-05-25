@@ -176,15 +176,18 @@ const Table = () => {
                   </td>
                   <PriceChange price={hourlyChange}>
                     <ArrowIcon price={hourlyChange} />
-                    {Math.abs(hourlyChange.toFixed(2))}%
+                    {Math.abs(hourlyChange?.toFixed(2))}%
                   </PriceChange>
                   <PriceChange price={dailyChange}>
                     <ArrowIcon price={dailyChange} />
-                    {Math.abs(dailyChange.toFixed(2))}%
+                    {Math.abs(dailyChange?.toFixed(2))}%
                   </PriceChange>
                   <PriceChange price={weeklyChange}>
                     <ArrowIcon price={weeklyChange} />
-                    {Math.abs(weeklyChange.toFixed(2))}%
+                    {weeklyChange === "0"
+                      ? "0"
+                      : Math.abs(weeklyChange?.toFixed(2))}
+                    %{/* {Math.abs(weeklyChange.toFixed(2))}% */}
                   </PriceChange>
                   {/* 24h Volume / Market Cap */}
                   <td>

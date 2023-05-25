@@ -184,10 +184,7 @@ const Table = () => {
                   </PriceChange>
                   <PriceChange price={weeklyChange}>
                     <ArrowIcon price={weeklyChange} />
-                    {weeklyChange === "0"
-                      ? "0"
-                      : Math.abs(weeklyChange?.toFixed(2))}
-                    %{/* {Math.abs(weeklyChange.toFixed(2))}% */}
+                    {Math.abs(weeklyChange.toFixed(2))}%
                   </PriceChange>
                   {/* 24h Volume / Market Cap */}
                   <td>
@@ -220,7 +217,9 @@ const Table = () => {
                         </FirstData>
                         <SecondData color={secondColor}>
                           <DotIcon /> {currency.symbol}
-                          {formatCompactNumber(total_supply)}
+                          {total_supply === null
+                            ? "0.00"
+                            : formatCompactNumber(total_supply)}
                         </SecondData>
                       </FlexContainer>
                       <PercentageBar color={secondColor}>

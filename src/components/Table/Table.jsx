@@ -246,5 +246,3 @@ const Table = () => {
   );
 };
 export default Table;
-
-// CSS

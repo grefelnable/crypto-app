@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import * as Styled from "./CoinInformation.styled";
+import { LinkIcon } from "../../utils/icons";
 
 const CoinInformation = () => {
   const selectedCoin = useSelector((store) => store.singleCoin);
@@ -50,6 +51,7 @@ const CoinInformation = () => {
             {coinName} <span>({coinSymbol})</span>
           </Styled.CoinName>
           <Styled.CoinLink>
+            <LinkIcon />
             <a href={coinLink} target="_blank">
               {coinLinkName}
             </a>

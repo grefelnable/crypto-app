@@ -23,14 +23,15 @@ const ModalMenu = ({ toggleMenu }) => {
       >
         Coins
       </NavLink>
-      <NavLink
+      {/* add later when working on Portfolio */}
+      {/* <NavLink
         to="/portfolio"
         onClick={() => {
-          setToggleMenu(!toggleMenu);
+          setToggleMenu();
         }}
       >
         Portfolio
-      </NavLink>
+      </NavLink> */}
       {/* theme and currency buttons */}
       <ButtonContainer>
         <SetCurrency />

@@ -35,12 +35,20 @@ const Home = () => {
       }));
 
       setIsLoaded(true);
-      setLastUpdate(moment(itemsPrices[180].x).format("MMM DD, YYYY"));
+      setLastUpdate(
+        moment(itemsPrices[itemsPrices.length - 1].x).format("MMM DD, YYYY")
+      );
       setCoinData(itemsPrices);
       setCoinVolume(itemsVolume);
-      setBtcCurrentPrice(Number(itemsPrices[180].y).toLocaleString());
-      setBtcCurrentVolume(formatCompactNumber(itemsVolume[180].y));
-      setVolumeLastUpdate(moment(itemsVolume[180].x).format("MMM DD, YYYY"));
+      setBtcCurrentPrice(
+        Number(itemsPrices[itemsPrices.length - 1].y).toLocaleString()
+      );
+      setBtcCurrentVolume(
+        formatCompactNumber(itemsVolume[itemsVolume.length - 1].y)
+      );
+      setVolumeLastUpdate(
+        moment(itemsVolume[itemsVolume.length - 1].x).format("MMM DD, YYYY")
+      );
     };
     fetchBitcoinData().catch(console.error);
   }, [currency]);

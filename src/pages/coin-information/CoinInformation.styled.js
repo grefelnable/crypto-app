@@ -59,3 +59,8 @@ export const Price = styled.p`
   font-size: 1.5rem;
   font-weight: 500;
 `;
+
+export const DailyPriceChange = styled.p`
+  color: ${(props) => (props.price > 0 ? "#00FC2A" : "#FE1040")};
+  min-width: 70px;
+`;

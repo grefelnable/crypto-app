@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
-export const Container = styled.section``;
+export const Container = styled.section`
+  display: flex;
+  gap: 1em;
+`;
 
 export const CoinImageWebsite = styled.article`
   background: ${({ theme }) => theme.background};
   border-radius: 1.5em;
-  width: 300px;
+  width: 85vw;
   padding: 1.75em 3em;
   text-align: center;
 `;
@@ -22,13 +25,37 @@ export const CoinImage = styled.div`
 
 export const CoinName = styled.p`
   letter-spacing: var(--letterSpacing);
+  margin-bottom: 1em;
   span {
     text-transform: uppercase;
   }
 `;
 
 export const CoinLink = styled.div`
+  padding: 2px 4px;
+  border-radius: var(--borderRadius);
+  svg {
+    color: ${({ theme }) => theme.text};
+    width: 1rem;
+    margin-right: 1em;
+    margin-bottom: -2px;
+    stroke-width: 2px;
+  }
   a {
     color: ${({ theme }) => theme.text};
   }
+  background: ${({ theme }) => theme.backgroundVariant};
+`;
+
+export const MarketData = styled.article`
+  background: ${({ theme }) => theme.background};
+  border-radius: 1.5em;
+  width: 85vw;
+  padding: 1.75em 3em;
+  text-align: center;
+`;
+
+export const Price = styled.p`
+  font-size: 1.5rem;
+  font-weight: 500;
 `;

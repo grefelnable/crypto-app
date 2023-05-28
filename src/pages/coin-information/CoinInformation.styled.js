@@ -53,6 +53,11 @@ export const MarketData = styled.article`
   width: 85vw;
   padding: 1.75em 3em;
   text-align: center;
+
+  /* square stack icon */
+  svg {
+    width: 40px;
+  }
 `;
 
 export const Price = styled.p`
@@ -63,4 +68,5 @@ export const Price = styled.p`
 export const DailyPriceChange = styled.p`
   color: ${(props) => (props.price > 0 ? "#00FC2A" : "#FE1040")};
   min-width: 70px;
+  margin-bottom: 0.5em;
 `;

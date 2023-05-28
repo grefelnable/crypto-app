@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import * as Styled from "./CoinInformation.styled";
-import { LinkIcon } from "../../utils/icons";
+import { LinkIcon, SquareStackIcon } from "../../utils/icons";
 import { ArrowIcon } from "../../components/Table/Table.styled";
 
 const CoinInformation = () => {
@@ -84,6 +84,7 @@ const CoinInformation = () => {
             <ArrowIcon price={coinDailyChange} />
             {Math.abs(coinDailyChange?.toFixed(2))}%
           </Styled.DailyPriceChange>
+          <SquareStackIcon />
         </Styled.MarketData>
         {/* Market Cap */}
       </Styled.Container>

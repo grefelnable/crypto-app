@@ -70,3 +70,16 @@ export const DailyPriceChange = styled.p`
   min-width: 70px;
   margin-bottom: 0.5em;
 `;
+
+export const FlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin: 0 auto;
+`;
+
+export const AthAtlWrapper = styled.div`
+  h5 {
+    margin-bottom: 0.15em;
+  }
+`;
